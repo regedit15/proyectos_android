@@ -96,7 +96,7 @@ public class MainActivity extends Activity
         try
         {
             //httpGetData("http://10.0.2.2/prueba/registrarProducto.php?nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
-            httpGetData("http://10.0.0.5/prueba/registrarProducto.php?nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
+            httpGetData("http://192.168.1.101/prueba/registrarProducto.php?nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
             Toast.makeText(getApplicationContext(), "Listo!", 1000).show();
 
             ed_nombre.setText("");
@@ -115,7 +115,7 @@ public class MainActivity extends Activity
         try {
             String data;
             //data=httpGetData("http://10.0.2.2/prueba/consultarProducto.php?id=" + ed_id.getText());
-            data=httpGetData("http://10.0.0.5/prueba/consultarProducto.php?id=" + ed_id.getText());
+            data=httpGetData("http://192.168.1.101/prueba/consultarProducto.php?id=" + ed_id.getText());
             if(data.length()>1)
             {
                 ja=new JSONArray(data);
@@ -146,7 +146,7 @@ public class MainActivity extends Activity
         try
         {
             //httpGetData("http://10.0.2.2/prueba/eliminarProducto.php?id=" + ed_id.getText());
-            httpGetData("http://10.0.0.5/prueba/eliminarProducto.php?id=" + ed_id.getText());
+            httpGetData("http://192.168.1.101/prueba/eliminarProducto.php?id=" + ed_id.getText());
             Toast.makeText(getApplicationContext(), "Producto eliminado", 1000).show();
 
             ed_id.setText("");
@@ -165,7 +165,7 @@ public class MainActivity extends Activity
         try
         {
             //httpGetData("http://10.0.2.2/prueba/modificarProducto.php?id=" + ed_id.getText() + "&nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
-            httpGetData("http://10.0.0.5/prueba/modificarProducto.php?id=" + ed_id.getText() + "&nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
+            httpGetData("http://192.168.1.101/prueba/modificarProducto.php?id=" + ed_id.getText() + "&nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
 
             Toast.makeText(getApplicationContext(), "Producto Modificado", 1000).show();
         }
@@ -194,52 +194,35 @@ public class MainActivity extends Activity
 
     public void contar(View v)
     {
+        String jsonResult2 = httpGetData("http://192.168.1.101/prueba/listarProductos.php");
 
-        JSONArray ja = null;
         try
         {
-            String data;
-            //data = httpGetData("http://10.0.2.2/prueba/listarProductos.php");
-            data = httpGetData("http://10.0.0.5/prueba/listarProductos.php");
-            if(data.length()>1)
-            {
-                ja = new JSONArray(data);
-            }
+            JSONObject jsonResponse = new JSONObject(jsonResult2);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista_productos");
 
+            ArrayList<Producto> productos = new ArrayList<Producto>();
+            for(int i = 0; i<jsonMainNode.length();i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+                String nombre = jsonChildNode.optString("nombre");
+                double precio = jsonChildNode.optDouble("precio");
+
+                Producto x = new Producto();
+                x.setId(id);
+                x.setNombre(nombre);
+                x.setPrecio(precio);
+                productos.add(x);
+            }
         }
         catch (JSONException e)
         {
+            Toast.makeText(getApplicationContext(), "Error!: " + e.getMessage(), 1000).show();
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error recuperando la informacion del servidor, verifique su conexion a internet y vuelva a intentarlo.", 1000).show();
         }
-
-
-        ArrayList<Producto> productos = new ArrayList<Producto>();
-
-        for (int i = 0; i < ja.length(); i++)
-        {
-            JSONObject jsonObject = null;
-
-            try
-            {
-                jsonObject = ja.getJSONObject(i);
-
-                Producto x = new Producto();
-
-                x.setId(jsonObject.getInt("id"));
-                x.setNombre(jsonObject.getString("nombre"));
-                x.setPrecio(jsonObject.getDouble("precio"));
-                productos.add(x);
-            }
-            catch (JSONException e)
-            {
-                Toast.makeText(getApplicationContext(), "Error!: " + e.getMessage(), 1000).show();
-                e.printStackTrace();
-            }
-
-        }
-
-
     }
+
+
     
 }

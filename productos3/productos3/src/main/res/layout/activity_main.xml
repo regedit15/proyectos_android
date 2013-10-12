@@ -43,17 +43,14 @@
                 android:layout_column="0" />
 
             <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ed_id"
-                android:layout_alignBaseline="@+id/textView"
-                android:layout_alignBottom="@+id/textView"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/textView2"
                 android:layout_column="1"
                 android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
@@ -72,15 +69,12 @@
                 android:layout_column="0" />
 
             <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/ed_nombre"
-                android:layout_gravity="center_vertical"
-                android:layout_alignBottom="@+id/textView2"
-                android:layout_alignRight="@+id/ed_id"
-                android:layout_toRightOf="@+id/textView2"
                 android:layout_column="1"
                 android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
@@ -99,15 +93,14 @@
                 android:layout_column="0" />
 
             <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/ed_precio"
-                android:layout_alignBottom="@+id/textView3"
-                android:layout_alignLeft="@+id/ed_nombre"
                 android:layout_column="1"
                 android:layout_weight="1" />
+
         </TableRow>
     </TableLayout>
 

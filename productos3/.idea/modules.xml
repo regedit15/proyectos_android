@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/productos3.iml" filepath="$PROJECT_DIR$/productos3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/productos3/productos3-productos3.iml" filepath="$PROJECT_DIR$/productos3/productos3-productos3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/productos3/build/source/buildConfig/buildConfig.iml" filepath="$PROJECT_DIR$/productos3/build/source/buildConfig/buildConfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/productos3/build/manifests/debug/debug.iml" filepath="$PROJECT_DIR$/productos3/build/manifests/debug/debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/productos3/src/main/main.iml" filepath="$PROJECT_DIR$/productos3/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/productos3/build/source/r/r.iml" filepath="$PROJECT_DIR$/productos3/build/source/r/r.iml" />
     </modules>
   </component>
 </project>
