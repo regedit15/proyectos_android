@@ -1,0 +1,190 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"></LinearLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Id"
+                android:id="@+id/textView2"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/textView2"
+                android:layout_gravity="center_vertical|right"
+                android:layout_column="0" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/ed_id"
+                android:layout_alignBaseline="@+id/textView"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_column="1"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Nombre"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"
+                android:layout_column="0" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/ed_nombre"
+                android:layout_gravity="center_vertical"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignRight="@+id/ed_id"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_column="1"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Precio"
+                android:id="@+id/textView"
+                android:layout_gravity="center_vertical|right"
+                android:layout_below="@+id/textView2"
+                android:layout_toLeftOf="@+id/ed_precio"
+                android:layout_column="0" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/ed_precio"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignLeft="@+id/ed_nombre"
+                android:layout_column="1"
+                android:layout_weight="1" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Enviar"
+                android:id="@+id/button"
+                android:onClick="enviar"
+                android:layout_below="@+id/button"
+                android:layout_alignLeft="@+id/ed_precio"
+                android:layout_column="0" />
+
+            <Button
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Buscar"
+                android:id="@+id/button2"
+                android:onClick="buscarProducto"
+                android:layout_below="@+id/button2"
+                android:layout_alignLeft="@+id/ed_precio"
+                android:layout_column="1" />
+
+            <Button
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Listar"
+                android:id="@+id/button5"
+                android:onClick="cambiarLayout"
+                android:layout_below="@+id/button4"
+                android:layout_alignLeft="@+id/ed_precio"
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Modificar"
+                android:id="@+id/button3"
+                android:onClick="modificar"
+                android:layout_below="@+id/ed_precio"
+                android:layout_alignLeft="@+id/ed_precio"
+                android:layout_column="0" />
+
+            <Button
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Eliminar"
+                android:id="@+id/button4"
+                android:onClick="eliminar"
+                android:layout_below="@+id/button5"
+                android:layout_alignLeft="@+id/ed_precio" />
+
+            <Button
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Contar"
+                android:id="@+id/button6"
+                android:onClick="contar"
+                android:layout_below="@+id/button3"
+                android:layout_alignLeft="@+id/ed_precio"
+                android:layout_column="2" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
