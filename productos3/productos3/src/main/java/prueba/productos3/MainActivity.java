@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Clases.Producto;
-import Clases.listar;
 
 public class MainActivity extends Activity
 {
@@ -186,8 +185,9 @@ public class MainActivity extends Activity
     public void cambiarLayout(View v)
     {
 
-        Intent i = new Intent(this, listar.class );
+        Intent i = new Intent(this, Listado.class );
         startActivity(i);
+
 
 
     }

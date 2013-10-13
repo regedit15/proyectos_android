@@ -1,19 +1,17 @@
-package Clases;
+package prueba.productos3;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import prueba.productos3.R;
-
 /**
- * Created by martincho on 01/10/13.
+ * Created by martin on 13/10/13.
  */
-public class listar extends Activity
+public class Listado extends Activity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.listar);
+        setContentView(R.layout.listado);
     }
 }
