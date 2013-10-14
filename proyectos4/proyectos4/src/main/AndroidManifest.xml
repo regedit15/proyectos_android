@@ -8,6 +8,9 @@
         android:minSdkVersion="7"
         android:targetSdkVersion="18" />
 
+    <!-- Este es el Permiso de Internet, sino no anda nada -->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Listado"></activity>
+
     </application>
 
 </manifest>
