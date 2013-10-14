@@ -8,6 +8,8 @@
         android:minSdkVersion="7"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"></uses-permission>
+
     <!-- Este es el Permiso de Internet, sino no anda nada -->
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 

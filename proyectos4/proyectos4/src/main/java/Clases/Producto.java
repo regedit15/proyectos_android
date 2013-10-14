@@ -5,15 +5,15 @@ package Clases;
  */
 public class Producto
 {
-    int id;
-    String nombre;
-    double precio;
+    private int id;
+    private String nombre;
+    private double precio;
 
     public Producto(int id, String nombre, double precio)
     {
-        id = this.id;
-        nombre = this.nombre;
-        precio = this.precio;
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
     }
 
     public Producto()
