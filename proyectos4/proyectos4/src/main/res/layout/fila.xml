@@ -21,15 +21,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/tv_nombre" />
+                android:text="NOMBRE"
+                android:id="@+id/tv_nombre"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/tv_precio" />
+                android:text="precio"
+                android:id="@+id/tv_precio"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
