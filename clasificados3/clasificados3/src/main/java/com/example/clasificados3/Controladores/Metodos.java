@@ -12,6 +12,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -58,41 +59,30 @@ public class Metodos
 
     public int validarUsuario(String usuario)
     {
-        JSONArray ja=null;
         int x = 0;
+        String jsonResult2 = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarNombreUsuario.php?usuario=" + usuario);
+
         try
         {
-            String data;
-            data=httpGetData("http://" + ip + "/prueba/Clasificados_ValidarUsuario.php?usuario=" + usuario);
+            JSONObject jsonResponse = new JSONObject(jsonResult2);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
 
-            if(data.length()>1)
-            {
-                ja=new JSONArray(data);
-            }
-
-            x = ja.getInt(0);
+            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
+            x = jsonChildNode.optInt("respuesta");
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
-
         return x;
+
     }
-
-
-
 
     public void insertarUsuario(Usuario x)
     {
         httpGetData("http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo());
     }
 
-
-    public void enviarCorreo(String destinatario, String cuerpo)
-    {
-        httpGetData("http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?destinatario=" + destinatario + "&cuerpo=" + cuerpo);
-    }
 
 
 //

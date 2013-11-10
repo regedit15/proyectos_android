@@ -3,8 +3,6 @@ package com.example.clasificados3;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -41,9 +39,6 @@ public class RegistrarUsuario extends Activity
     public void registrarUsuario(View view)
     {
 
-
-
-
         if (metodos.validarUsuario("" + et_usuario.getText()) == 0)
         {
             Usuario x = new Usuario();
@@ -53,8 +48,7 @@ public class RegistrarUsuario extends Activity
             x.setCorreo("" + et_correo.getText());
 
             metodos.insertarUsuario(x);
-            //String aa = md5(mt_rand());
-            //metodos.enviarCorreo("martinrossi9009@gmail.com", "<a href=http://localhost/prueba/Clasificados_ActivarUsuario.php?id=>Para activar su cuenta haga click aqui</a>");
+
             new AlertDialog.Builder(this)
                     .setTitle("Para finalizar ve a tu cuenta de correo!")
                     .setPositiveButton("Aceptar",
@@ -75,20 +69,5 @@ public class RegistrarUsuario extends Activity
         }
     }
 
-
-
-    private void enviarrrr(String[] to, String[] cc,
-                        String asunto, String mensaje) {
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        //String[] to = direccionesEmail;
-        //String[] cc = copias;
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-        emailIntent.putExtra(Intent.EXTRA_CC, cc);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, asunto);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-        emailIntent.setType("message/rfc822");
-        startActivity(Intent.createChooser(emailIntent, "Email "));
-    }
 
 }
