@@ -57,18 +57,36 @@ public class Metodos
     }
 
 
-    public int validarUsuario(String usuario)
+    public int validarNombreUsuario(String usuario)
     {
         int x = 0;
-        String jsonResult2 = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarNombreUsuario.php?usuario=" + usuario);
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarNombreUsuario.php?usuario=" + usuario);
 
         try
         {
-            JSONObject jsonResponse = new JSONObject(jsonResult2);
+            JSONObject jsonResponse = new JSONObject(jsonResult);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
 
-            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
-            x = jsonChildNode.optInt("respuesta");
+            x = jsonMainNode.getInt(0);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return x;
+    }
+
+    public int validarUsuario(String usuario, String password)
+    {
+        int x = 0;
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarUsuario.php?usuario=" + usuario + "&password=" + password);
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            x = jsonMainNode.getInt(0);
         }
         catch (JSONException e)
         {

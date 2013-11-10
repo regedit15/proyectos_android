@@ -26,7 +26,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/et_usuario"
                 android:layout_column="1"
                 android:layout_weight="1" />
         </TableRow>
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/et_password"
                 android:layout_column="1"
                 android:layout_weight="1" />
         </TableRow>
@@ -64,8 +64,9 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Iniciar Sesion3"
-            android:id="@+id/button" />
+            android:text="Iniciar Sesion7"
+            android:id="@+id/button"
+            android:onClick="iniciarSesion" />
 
         <Button
             android:layout_width="150dp"

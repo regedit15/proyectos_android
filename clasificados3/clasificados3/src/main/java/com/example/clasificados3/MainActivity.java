@@ -1,5 +1,7 @@
 package com.example.clasificados3;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,13 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.example.clasificados3.Clases.Usuario;
+import com.example.clasificados3.Controladores.Metodos;
 
 public class MainActivity extends ActionBarActivity
 {
     public static String ip = "10.0.0.3";
-
-
-
+    public static Usuario usuario = new Usuario();
+    Metodos metodos = new Metodos(ip);
+    EditText et_usuario;
+    EditText et_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class MainActivity extends ActionBarActivity
 //        StrictMode.setThreadPolicy(policy);
         //-------------------------------
 
+        et_usuario = (EditText)findViewById(R.id.et_usuario);
+        et_password = (EditText)findViewById(R.id.et_password);
 
 
     }
@@ -75,9 +84,32 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    public void registrarse(View view) {
+    public void registrarse(View view)
+    {
         Intent i = new Intent(this, RegistrarUsuario.class );
         startActivity(i);
+    }
+
+    public void iniciarSesion(View view)
+    {
+        int x = metodos.validarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
+
+        if(x == 1)
+        {
+            usuario.setUsuario(et_usuario.getText().toString());
+            Intent i = new Intent(this, Home.class );
+            startActivity(i);
+        }
+        else
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("El usuario o la contraseña no son correctas")
+                    .setPositiveButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {}
+                            }).show();
+        }
     }
 
 
