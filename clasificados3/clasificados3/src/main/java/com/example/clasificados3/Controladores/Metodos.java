@@ -2,6 +2,7 @@ package com.example.clasificados3.Controladores;
 
 import android.util.Log;
 
+import com.example.clasificados3.Clases.Clasificado;
 import com.example.clasificados3.Clases.Usuario;
 
 import org.apache.http.client.ClientProtocolException;
@@ -100,6 +101,12 @@ public class Metodos
     {
         httpGetData("http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo());
     }
+
+    public void insertarClasificado(Clasificado x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_InsertarClasificado.php?titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&imagen=" + x.getImagen() + "&categoria=" + x.getCategoria());
+    }
+
 
 
 

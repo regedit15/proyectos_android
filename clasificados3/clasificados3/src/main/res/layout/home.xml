@@ -23,9 +23,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nuevo"
+                android:text="Nuevow"
                 android:id="@+id/button"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:onClick="clasificado" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

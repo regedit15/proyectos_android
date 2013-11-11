@@ -28,6 +28,7 @@
 
         <activity android:name=".RegistrarUsuario"></activity>
         <activity android:name=".Home"></activity>
+        <activity android:name=".AltaClasificado"></activity>
     </application>
 
 </manifest>

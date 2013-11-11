@@ -1,7 +1,9 @@
 package com.example.clasificados3;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -18,5 +20,12 @@ public class Home extends Activity
 
         TextView tv_usuario = (TextView)findViewById(R.id.et_usuario);
         tv_usuario.setText("Vienvenido " + MainActivity.usuario.getUsuario());
+    }
+
+
+    public void clasificado(View view)
+    {
+        Intent i = new Intent(this, AltaClasificado.class );
+        startActivity(i);
     }
 }
