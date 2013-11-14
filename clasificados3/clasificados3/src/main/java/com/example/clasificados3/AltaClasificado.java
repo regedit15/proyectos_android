@@ -149,7 +149,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         et_titulo.setText("");
         et_descripcion.setText("");
         et_precio.setText("");
-//        et_imagen.setText("");
     }
 
     public void cancelar(View view)

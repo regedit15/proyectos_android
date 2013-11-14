@@ -19,11 +19,11 @@ public class Home extends Activity
         setContentView(R.layout.home);
 
         TextView tv_usuario = (TextView)findViewById(R.id.et_usuario);
-        tv_usuario.setText("Vienvenido " + MainActivity.usuario.getUsuario());
+        tv_usuario.setText("Bienvenido " + MainActivity.usuario.getUsuario());
     }
 
 
-    public void clasificado(View view)
+    public void nuevoClasificado(View view)
     {
         Intent i = new Intent(this, AltaClasificado.class );
         startActivity(i);

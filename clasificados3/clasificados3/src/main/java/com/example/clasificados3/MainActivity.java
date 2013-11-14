@@ -43,10 +43,6 @@ public class MainActivity extends ActionBarActivity
 
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
-
-
-    //preuba git
-
     }
 
 
@@ -107,14 +103,14 @@ public class MainActivity extends ActionBarActivity
         }
         else
         {
-            new AlertDialog.Builder(this)
-                    .setTitle("El usuario o la contraseña no son correctas")
-                    .setPositiveButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {}
-                            }).show();
-        }
+        new AlertDialog.Builder(this)
+                .setTitle("El usuario o la contraseña no son correctas")
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {}
+                        }).show();
+    }
     }
 
 }

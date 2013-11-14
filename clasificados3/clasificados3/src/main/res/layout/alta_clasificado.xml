@@ -162,7 +162,7 @@
                     <Button
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="Nuevo2"
+                        android:text="Nuevo"
                         android:id="@+id/button"
                         android:layout_column="0"
                         android:onClick="nuevoClasificado" />
