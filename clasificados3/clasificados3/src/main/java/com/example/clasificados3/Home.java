@@ -28,4 +28,12 @@ public class Home extends Activity
         Intent i = new Intent(this, AltaClasificado.class );
         startActivity(i);
     }
+
+    public void listarClasificados(View view)
+    {
+        Intent i = new Intent(this, ListadoClasificados.class );
+        startActivity(i);
+    }
+
+
 }

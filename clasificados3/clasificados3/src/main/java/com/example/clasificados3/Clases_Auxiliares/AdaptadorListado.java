@@ -1,4 +1,4 @@
-package prueba.proyectos4;
+package com.example.clasificados3.Clases_Auxiliares;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-/** Adaptador de ListView universal, para www.jarroba.com
- * @author Ramon Invarato Menéndez
+/**
+ * Created by martincho on 14/11/13.
  */
 public abstract class AdaptadorListado extends BaseAdapter {
 

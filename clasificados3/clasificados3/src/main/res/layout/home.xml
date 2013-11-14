@@ -28,5 +28,18 @@
                 android:layout_column="0"
                 android:onClick="clasificado" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listar Clasificados"
+                android:id="@+id/button2"
+                android:layout_column="0"
+                android:onClick="listarClasificados" />
+        </TableRow>
     </TableLayout>
 </LinearLayout>

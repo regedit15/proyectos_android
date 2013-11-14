@@ -1,5 +1,7 @@
 package com.example.clasificados3.Clases;
 
+import java.util.ArrayList;
+
 /**
  * Created by martincho on 10/11/13.
  */
@@ -10,17 +12,17 @@ public class Clasificado
     String titulo;
     String descripcion;
     Double precio;
-    String imagen;
+    ArrayList<Imagen> imagenes = new ArrayList<Imagen>();
     Categoria categoria;
 
-    public Clasificado(int id, Usuario usuario, String titulo, String descripcion, Double precio, String imagen, Categoria categoria)
+    public Clasificado(int id, Usuario usuario, String titulo, String descripcion, Double precio, ArrayList<Imagen> imagenes, Categoria categoria)
     {
         this.id = id;
         this.usuario = usuario;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.imagen = imagen;
+        this.imagenes = imagenes;
         this.categoria = categoria;
     }
 
@@ -70,12 +72,12 @@ public class Clasificado
         this.precio = precio;
     }
 
-    public String getImagen() {
-        return imagen;
+    public ArrayList<Imagen> getImagenes() {
+        return imagenes;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImagenes(ArrayList<Imagen> imagenes) {
+        this.imagenes = imagenes;
     }
 
     public Categoria getCategoria() {
