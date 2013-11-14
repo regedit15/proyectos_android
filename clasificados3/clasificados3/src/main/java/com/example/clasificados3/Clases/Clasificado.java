@@ -6,15 +6,17 @@ package com.example.clasificados3.Clases;
 public class Clasificado
 {
     int id;
+    Usuario usuario;
     String titulo;
     String descripcion;
     Double precio;
     String imagen;
-    int categoria;
+    Categoria categoria;
 
-    public Clasificado(int id, String titulo, String descripcion, Double precio, String imagen,int categoria)
+    public Clasificado(int id, Usuario usuario, String titulo, String descripcion, Double precio, String imagen, Categoria categoria)
     {
         this.id = id;
+        this.usuario = usuario;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -25,6 +27,15 @@ public class Clasificado
     public Clasificado()
     {
 
+    }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -67,11 +78,11 @@ public class Clasificado
         this.imagen = imagen;
     }
 
-    public int getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(int categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 }

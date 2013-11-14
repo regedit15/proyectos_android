@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity
     EditText et_usuario;
     EditText et_password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,8 @@ public class MainActivity extends ActionBarActivity
 
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
+
+
 
 
     }
@@ -96,9 +99,11 @@ public class MainActivity extends ActionBarActivity
 
         if(x == 1)
         {
-            usuario.setUsuario(et_usuario.getText().toString());
+            usuario = metodos.getUsuario(et_usuario.getText().toString());
+
             Intent i = new Intent(this, Home.class );
             startActivity(i);
+
         }
         else
         {
@@ -111,6 +116,15 @@ public class MainActivity extends ActionBarActivity
                             }).show();
         }
     }
+
+
+
+
+
+
+
+
+
 
 
 }

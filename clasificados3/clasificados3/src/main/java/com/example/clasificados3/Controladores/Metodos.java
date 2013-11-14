@@ -2,8 +2,11 @@ package com.example.clasificados3.Controladores;
 
 import android.util.Log;
 
+import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Clasificado;
+import com.example.clasificados3.Clases.Imagen;
 import com.example.clasificados3.Clases.Usuario;
+import com.example.clasificados3.MainActivity;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -16,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by martincho on 09/11/13.
@@ -23,6 +27,7 @@ import java.io.IOException;
 public class Metodos
 {
     String ip;
+
     public Metodos(String ip)
     {
         this.ip = ip;
@@ -56,7 +61,6 @@ public class Metodos
         }
         return response;
     }
-
 
     public int validarNombreUsuario(String usuario)
     {
@@ -97,23 +101,127 @@ public class Metodos
 
     }
 
-    public void insertarUsuario(Usuario x)
+    public int insertarUsuario(Usuario x)
     {
-        httpGetData("http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo());
+        int id = 0;
+
+        String popo = "http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo();
+        String jsonResult = httpGetData(popo);
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            id = jsonMainNode.getInt(0);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
     }
 
-    public void insertarClasificado(Clasificado x)
+    public int insertarClasificado(Clasificado x)
     {
-        httpGetData("http://" + ip + "/prueba/Clasificados_InsertarClasificado.php?titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&imagen=" + x.getImagen() + "&categoria=" + x.getCategoria());
+        int id = 0;
+
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_InsertarClasificado.php?id_usuario="+ MainActivity.usuario.getId() +"&titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&imagen=" + x.getImagen() + "&id_categoria=" + x.getCategoria().getId());
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            id = jsonMainNode.getInt(0);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public int insertarImagen(Imagen x)
+    {
+        int id = 0;
+
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_InsertarImagen.php?id_clasificado=" + x.getClasificado().getId() + "&nombre=" + x.getNombre());
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            id = jsonMainNode.getInt(0);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public ArrayList<Categoria> getCategorias()
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetCategorias.php");
+        ArrayList<Categoria> lista = new ArrayList<Categoria>();
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+
+            for(int i = 0; i<jsonMainNode.length();i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+                String nombre = jsonChildNode.optString("nombre");
+
+                Categoria x = new Categoria();
+                x.setId(id);
+                x.setNombre(nombre);
+                lista.add(x);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
 
 
 
-//
-//
-//    public Producto getProducto(String id)
-//    {
+
+
+    public Usuario getUsuario(String nombreUsuario)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetUsuario.php?usuario=" + nombreUsuario);
+        Usuario x = new Usuario();
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
+            int id = jsonChildNode.optInt("id");
+            String usuario = jsonChildNode.optString("usuario");
+            String password = jsonChildNode.optString("password");
+
+            x.setId(id);
+            x.setUsuario(usuario);
+            x.setPassword(password);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return x;
+
 //        Producto x = new Producto();
 //
 //        JSONArray ja=null;
@@ -146,7 +254,7 @@ public class Metodos
 //        }
 //
 //        return x;
-//    }
+    }
 //
 //
 //    public void eliminarProducto(String id)
@@ -177,34 +285,5 @@ public class Metodos
 //    }
 //
 //
-//    public ArrayList<Producto> getProductos()
-//    {
-//        String jsonResult2 = httpGetData("http://" + ip + "/prueba/listarProductos.php");
-//        ArrayList<Producto> productos = new ArrayList<Producto>();
-//        try
-//        {
-//            JSONObject jsonResponse = new JSONObject(jsonResult2);
-//            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista_productos");
-//
-//
-//            for(int i = 0; i<jsonMainNode.length();i++)
-//            {
-//                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-//                int id = jsonChildNode.optInt("id");
-//                String nombre = jsonChildNode.optString("nombre");
-//                double precio = jsonChildNode.optDouble("precio");
-//
-//                Producto x = new Producto();
-//                x.setId(id);
-//                x.setNombre(nombre);
-//                x.setPrecio(precio);
-//                productos.add(x);
-//            }
-//        }
-//        catch (JSONException e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return productos;
-//    }
+
 }
