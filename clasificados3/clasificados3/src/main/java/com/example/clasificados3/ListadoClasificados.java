@@ -70,11 +70,6 @@ public class ListadoClasificados extends Activity
                             iv_imagen.setImageDrawable(image);
                         }
                     }
-
-
-                    //aaaaaaaaaaaaa
-
-
                 }
             }
         });

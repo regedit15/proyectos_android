@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity
         et_password = (EditText)findViewById(R.id.et_password);
 
 
-
+    //preuba git
 
     }
 
@@ -116,15 +116,5 @@ public class MainActivity extends ActionBarActivity
                             }).show();
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 }
