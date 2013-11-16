@@ -19,6 +19,7 @@ import com.example.clasificados3.Controladores.Metodos;
 public class MainActivity extends ActionBarActivity
 {
     public static String ip = "10.0.0.3";
+    public static String pathImagenesServidor = "http://" + MainActivity.ip + "/prueba/uploads/";
     public static Usuario usuario = new Usuario();
     Metodos metodos = new Metodos(ip);
     EditText et_usuario;
@@ -43,6 +44,10 @@ public class MainActivity extends ActionBarActivity
 
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
+
+
+        Intent i = new Intent(this, DetalleClasificado.class );
+        startActivity(i);
     }
 
 
@@ -110,7 +115,14 @@ public class MainActivity extends ActionBarActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {}
                         }).show();
+        }
     }
+
+
+    public void prueba(View view)
+    {
+        Intent i = new Intent(this, DetalleClasificado.class );
+        startActivity(i);
     }
 
 }

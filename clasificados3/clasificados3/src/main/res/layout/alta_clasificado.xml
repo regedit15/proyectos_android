@@ -101,7 +101,7 @@
                         android:layout_gravity="center_vertical" />
 
                     <Spinner
-                        android:id="@+id/spinner"
+                        android:id="@+id/sp_categorias"
                         android:layout_width="fill_parent"
                         android:prompt="@string/spinner_title"
                         android:layout_weight="1"

@@ -1,5 +1,6 @@
 package com.example.clasificados3.Controladores;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.example.clasificados3.Clases.Categoria;
@@ -19,6 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +66,8 @@ public class Metodos
         return response;
     }
 
+
+    //--------------------- Metodos de Usuario
     public int validarNombreUsuario(String usuario)
     {
         int x = 0;
@@ -122,6 +128,36 @@ public class Metodos
         return id;
     }
 
+    public Usuario getUsuario(String nombreUsuario)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetUsuario.php?usuario=" + nombreUsuario);
+        Usuario x = new Usuario();
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
+            int id = jsonChildNode.optInt("id");
+            String usuario = jsonChildNode.optString("usuario");
+            String password = jsonChildNode.optString("password");
+
+            x.setId(id);
+            x.setUsuario(usuario);
+            x.setPassword(password);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    //--------------------------------------------------------------------------------
+
+    //--------------------- Metodos Clasificado
+
     public int insertarClasificado(Clasificado x)
     {
         int id = 0;
@@ -142,6 +178,103 @@ public class Metodos
         return id;
     }
 
+    public ArrayList<Clasificado> getClasificados()
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificados.php");
+        ArrayList<Clasificado> lista = new ArrayList<Clasificado>();
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+
+            for(int i = 0; i < jsonMainNode.length(); i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+                int idUsuario = jsonChildNode.optInt("id_usuario");
+                String titulo = jsonChildNode.optString("titulo");
+                String descripcion = jsonChildNode.optString("descripcion");
+                Double precio = jsonChildNode.optDouble("precio");
+//                int idCategoria = jsonChildNode.optInt("id_categoria");
+
+                Clasificado x = new Clasificado();
+
+                x.setId(id);
+
+                Usuario usuario = new Usuario();
+                usuario.setId(idUsuario);
+                x.setUsuario(usuario);
+
+                x.setTitulo(titulo);
+
+                x.setDescripcion(descripcion);
+
+                x.setPrecio(precio);
+
+                ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
+                x.setImagenes(imagenes);
+
+                //quitado para mejorar performance
+//                Categoria categoria = new Categoria();
+//                categoria.setId(idCategoria);
+//                categoria = getCategoria(categoria);
+//                x.setCategoria(categoria);
+
+                lista.add(x);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public Clasificado getClasificado(Clasificado clasificado)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificado.php?id=" + clasificado.getId());
+        Clasificado x = new Clasificado();
+
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
+            int id = jsonChildNode.optInt("id");
+            int idUsuario = jsonChildNode.optInt("id_usuario");
+            String titulo = jsonChildNode.optString("titulo");
+            String descripcion = jsonChildNode.optString("descripcion");
+            Double precio = jsonChildNode.optDouble("precio");
+
+            x.setId(id);
+
+            Usuario usuario = new Usuario();
+            usuario.setId(idUsuario);
+            x.setUsuario(usuario);
+
+            x.setTitulo(titulo);
+
+            x.setDescripcion(descripcion);
+
+            x.setPrecio(precio);
+
+            ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
+            x.setImagenes(imagenes);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    //-------------------------------------------------------------------------
+
+
+
+    //--------------------- Metodos Imagen
     public int insertarImagen(Imagen x)
     {
         int id = 0;
@@ -161,6 +294,47 @@ public class Metodos
         }
         return id;
     }
+
+
+    public ArrayList<Imagen> getImagenesPorClasificado(Clasificado clasificado)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetImagenesPorClasificado.php?id_clasificado=" + clasificado.getId());
+        ArrayList<Imagen> lista = new ArrayList<Imagen>();
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+
+            for(int i = 0; i<jsonMainNode.length();i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+//                int idClasificado = jsonChildNode.optInt("id_clasificado");
+                String nombre = jsonChildNode.optString("nombre");
+
+                Imagen x = new Imagen();
+                x.setId(id);
+
+//                quitado para mejorar perdormance
+//                Clasificado clasificado2 = new Clasificado();
+//                clasificado2.setId(idClasificado);
+//                x.setClasificado(clasificado2);
+
+                x.setNombre(nombre);
+                lista.add(x);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    //----------------------------------------------------------------
+
+
+    //--------------------- Metodos Categoria
 
     public ArrayList<Categoria> getCategorias()
     {
@@ -191,147 +365,36 @@ public class Metodos
         return lista;
     }
 
-
-    public ArrayList<Clasificado> getClasificados()
-    {
-        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificados.php");
-        ArrayList<Clasificado> lista = new ArrayList<Clasificado>();
-        try
-        {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+    //-------------------------------------------------------------------------
 
 
-            for(int i = 0; i < jsonMainNode.length(); i++)
-            {
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                int id = jsonChildNode.optInt("id");
-                int idUsuario = jsonChildNode.optInt("id_usuario");
-                String titulo = jsonChildNode.optString("titulo");
-                String descripcion = jsonChildNode.optString("descripcion");
-                Double precio = jsonChildNode.optDouble("precio");
-                int idCategoria = jsonChildNode.optInt("id_categoria");
-
-                Clasificado x = new Clasificado();
-
-                x.setId(id);
-
-                Usuario usuario = new Usuario();
-                usuario.setId(idUsuario);
-                x.setUsuario(usuario);
-
-                x.setTitulo(titulo);
-
-                x.setDescripcion(descripcion);
-
-                x.setPrecio(precio);
-
-                ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
-                x.setImagenes(imagenes);
-
-                Categoria categoria = new Categoria();
-                categoria.setId(idCategoria);
-                categoria = getCategoria(categoria);
-                x.setCategoria(categoria);
-
-                lista.add(x);
-            }
+    //------------------- Metodos para Cargar Una imagen desde una URL
+    public Drawable imageOperations(String url) {
+        try {
+            InputStream is = (InputStream) this.fetch(url);
+            Drawable d = Drawable.createFromStream(is, "src");
+            return d;
+        } catch (MalformedURLException e) {
+            return null;
+        } catch (IOException e) {
+            return null;
         }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return lista;
     }
 
-
-    public ArrayList<Imagen> getImagenesPorClasificado(Clasificado clasificado)
-    {
-        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetImagenesPorClasificado.php?id_clasificado=" + clasificado.getId());
-        ArrayList<Imagen> lista = new ArrayList<Imagen>();
-        try
-        {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
-
-
-            for(int i = 0; i<jsonMainNode.length();i++)
-            {
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                int id = jsonChildNode.optInt("id");
-                int idClasificado = jsonChildNode.optInt("id_clasificado");
-                String nombre = jsonChildNode.optString("nombre");
-
-                Imagen x = new Imagen();
-                x.setId(id);
-
-                Clasificado clasificado2 = new Clasificado();
-                clasificado2.setId(idClasificado);
-                x.setClasificado(clasificado2);
-
-                x.setNombre(nombre);
-                lista.add(x);
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return lista;
+    public Object fetch(String address) throws MalformedURLException,IOException {
+        URL url = new URL(address);
+        Object content = url.getContent();
+        return content;
     }
+    //----------------------------------------------------------------
 
-    public Usuario getUsuario(String nombreUsuario)
-    {
-        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetUsuario.php?usuario=" + nombreUsuario);
-        Usuario x = new Usuario();
 
-        try
-        {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
 
-            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
-            int id = jsonChildNode.optInt("id");
-            String usuario = jsonChildNode.optString("usuario");
-            String password = jsonChildNode.optString("password");
 
-            x.setId(id);
-            x.setUsuario(usuario);
-            x.setPassword(password);
 
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return x;
-    }
 
-    public Categoria getCategoria(Categoria categoria)
-    {
-        String popo = "http://" + ip + "/prueba/Clasificados_GetCategoria.php?id=" + categoria.getId();
-        String jsonResult = httpGetData(popo);
-        Categoria x = new Categoria();
 
-        try
-        {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
 
-            JSONObject jsonChildNode = jsonMainNode.getJSONObject(0);
-            int id = jsonChildNode.optInt("id");
-            String nombre = jsonChildNode.optString("nombre");
-
-            x.setId(id);
-            x.setNombre(nombre);
-
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return x;
-    }
 
 
 

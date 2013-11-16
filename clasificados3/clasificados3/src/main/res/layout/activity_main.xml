@@ -66,7 +66,7 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Iniciar Sesion9"
+            android:text="Iniciar Sesion"
             android:id="@+id/button"
             android:onClick="iniciarSesion" />
 
@@ -77,4 +77,13 @@
             android:id="@+id/button2"
             android:onClick="registrarse" />
     </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button5"
+        android:id="@+id/button3"
+        android:layout_gravity="center_horizontal"
+        android:onClick="prueba" />
 </LinearLayout>

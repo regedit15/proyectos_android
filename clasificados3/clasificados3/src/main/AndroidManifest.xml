@@ -30,6 +30,8 @@
         <activity android:name=".Home"></activity>
         <activity android:name=".AltaClasificado"></activity>
         <activity android:name=".ListadoClasificados"></activity>
+        <activity android:name=".DetalleClasificado"></activity>
+        <activity android:name=".VerImagen"></activity>
     </application>
 
 </manifest>

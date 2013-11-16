@@ -63,7 +63,7 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
 
         //------ Cargar combo/spinner Categoria
         // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.sp_categorias);
 
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
@@ -123,6 +123,8 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
 
                 metodos.insertarImagen(imagen);
             }
+
+            pathImagenes.clear();
 
             new AlertDialog.Builder(this)
                     .setTitle("Se ha creado un nuevo clasificado")
