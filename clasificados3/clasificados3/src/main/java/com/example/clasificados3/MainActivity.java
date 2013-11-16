@@ -44,10 +44,6 @@ public class MainActivity extends ActionBarActivity
 
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
-
-
-        Intent i = new Intent(this, DetalleClasificado.class );
-        startActivity(i);
     }
 
 
