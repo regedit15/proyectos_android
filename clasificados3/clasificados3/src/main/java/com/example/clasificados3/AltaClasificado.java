@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Clasificado;
 import com.example.clasificados3.Clases.Imagen;
 import com.example.clasificados3.Controladores.HttpFileUploader;
@@ -38,8 +37,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
     EditText et_titulo;
     EditText et_descripcion;
     EditText et_precio;
-//    EditText et_imagen;
-    ArrayList<Categoria> categorias;
     int categoriaSeleccionada;
     List<String> pathImagenes = new ArrayList <String>();
 
@@ -57,7 +54,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         et_descripcion = (EditText)findViewById(R.id.et_descripcion);
         et_precio = (EditText)findViewById(R.id.et_precio);
 
-        categorias = metodos.getCategorias();
 
 
 
@@ -71,9 +67,9 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         // Spinner Drop down elements
         List<String> items = new ArrayList <String>();
 
-        for (int i = 0; i < categorias.size() ;i++)
+        for (int i = 0; i < MainActivity.categorias.size() ;i++)
         {
-            items.add(categorias.get(i).getNombre());
+            items.add(MainActivity.categorias.get(i).getNombre());
         }
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
@@ -100,7 +96,7 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         x.setTitulo(et_titulo.getText().toString());
         x.setDescripcion(et_descripcion.getText().toString());
         x.setPrecio(Double.parseDouble(et_precio.getText().toString()));
-        x.setCategoria(categorias.get(categoriaSeleccionada));
+        x.setCategoria(MainActivity.categorias.get(categoriaSeleccionada));
 
         try
         {
@@ -175,12 +171,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
         categoriaSeleccionada = position;
-        // On selecting a spinner item
-//        String item = parent.getItemAtPosition(position).toString();
-//
-//        // Showing selected spinner item
-//        Toast.makeText(parent.getContext(), position + "Selected: " + item, Toast.LENGTH_LONG).show();
-
     }
 
     public void onNothingSelected(AdapterView<?> arg0)

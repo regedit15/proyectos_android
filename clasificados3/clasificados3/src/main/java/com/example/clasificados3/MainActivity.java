@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Usuario;
 import com.example.clasificados3.Controladores.Metodos;
+
+import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity
 {
@@ -22,12 +25,14 @@ public class MainActivity extends ActionBarActivity
     public static String pathImagenesServidor = "http://" + MainActivity.ip + "/prueba/uploads/";
     public static Usuario usuario = new Usuario();
     Metodos metodos = new Metodos(ip);
+    public static ArrayList<Categoria> categorias;
     EditText et_usuario;
     EditText et_password;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -41,9 +46,13 @@ public class MainActivity extends ActionBarActivity
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
 //        StrictMode.setThreadPolicy(policy);
         //-------------------------------
-
+        categorias = metodos.getCategorias();
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
+
+
+        Intent i = new Intent(this, ModificarClasificado.class );
+        startActivity(i);
     }
 
 
@@ -100,17 +109,16 @@ public class MainActivity extends ActionBarActivity
 
             Intent i = new Intent(this, Home.class );
             startActivity(i);
-
         }
         else
         {
-        new AlertDialog.Builder(this)
-                .setTitle("El usuario o la contraseña no son correctas")
-                .setPositiveButton("Aceptar",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {}
-                        }).show();
+            new AlertDialog.Builder(this)
+                    .setTitle("El usuario o la contraseña no son correctas")
+                    .setPositiveButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {}
+                            }).show();
         }
     }
 

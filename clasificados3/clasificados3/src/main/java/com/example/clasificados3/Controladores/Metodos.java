@@ -231,6 +231,52 @@ public class Metodos
         return lista;
     }
 
+    public ArrayList<Clasificado> getClasificadosPorUsuario(Usuario usuarioId)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificadosPorUsuario.php?id=" + usuarioId.getId());
+        ArrayList<Clasificado> lista = new ArrayList<Clasificado>();
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+
+            for(int i = 0; i < jsonMainNode.length(); i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+                int idUsuario = jsonChildNode.optInt("id_usuario");
+                String titulo = jsonChildNode.optString("titulo");
+                String descripcion = jsonChildNode.optString("descripcion");
+                Double precio = jsonChildNode.optDouble("precio");
+
+                Clasificado x = new Clasificado();
+
+                x.setId(id);
+
+                Usuario usuario = new Usuario();
+                usuario.setId(idUsuario);
+                x.setUsuario(usuario);
+
+                x.setTitulo(titulo);
+
+                x.setDescripcion(descripcion);
+
+                x.setPrecio(precio);
+
+                ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
+                x.setImagenes(imagenes);
+
+                lista.add(x);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
     public Clasificado getClasificado(Clasificado clasificado)
     {
         String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificado.php?id=" + clasificado.getId());

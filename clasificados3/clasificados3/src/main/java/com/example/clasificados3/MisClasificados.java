@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.clasificados3.Clases.Clasificado;
@@ -16,64 +14,33 @@ import com.example.clasificados3.Clases_Auxiliares.AdaptadorListado;
 import com.example.clasificados3.Controladores.Metodos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by martincho on 14/11/13.
+ * Created by martincho on 16/11/13.
  */
-public class ListadoClasificados extends Activity implements AdapterView.OnItemSelectedListener
+public class MisClasificados extends Activity
 {
     Metodos metodos = new Metodos(MainActivity.ip);
-    ListView lv_clasificados;
-    int categoriaSeleccionada;
+    ListView lv_misClasificados;
     ArrayList<Clasificado> clasificados;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listado_clasificados);
-
-
-
-        //------ Cargar combo/spinner Categoria
-        // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.sp_categorias);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
-
-        // Spinner Drop down elements
-        List<String> items = new ArrayList <String>();
-
-        for (int i = 0; i < MainActivity.categorias.size() ;i++)
-        {
-            items.add(MainActivity.categorias.get(i).getNombre());
-        }
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-        //--------------------------------------------------------------
-
+        setContentView(R.layout.mis_clasificados);
 
 
         //--------------------------        Carga de clasificados
-        clasificados = metodos.getClasificados();
+        clasificados = metodos.getClasificadosPorUsuario(MainActivity.usuario);
 
-        lv_clasificados = (ListView)findViewById(R.id.lv_clasificados);
-        lv_clasificados.setAdapter(new AdaptadorListado(this, R.layout.fila, clasificados) {
+        lv_misClasificados = (ListView)findViewById(R.id.lv_misClasificados);
+        lv_misClasificados.setAdapter(new AdaptadorListado(this, R.layout.fila, clasificados)
+        {
             @Override
             public void onEntrada(Object entrada, View view) {
-                if (entrada != null)
-                {
+                if (entrada != null) {
                     TextView tv_nombre = (TextView) view.findViewById(R.id.tv_nombre);
                     if (tv_nombre != null) {
                         tv_nombre.setText(((Clasificado) entrada).getTitulo());
@@ -83,6 +50,7 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
                     if (tv_precio != null) {
                         tv_precio.setText("" + ((Clasificado) entrada).getPrecio());
                     }
+
 
                     ImageView iv_imagen = (ImageView) view.findViewById(R.id.iv_imagen);
                     if (iv_imagen != null) {
@@ -97,7 +65,7 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
         });
 
         //se sobreescribe el metodo on click de la imagen
-        lv_clasificados.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lv_misClasificados.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -109,26 +77,10 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
     }
 
 
-
-
     public void verClasificado(int itemSeleccionado)
     {
-        Intent i = new Intent(this, DetalleClasificado.class );
+        Intent i = new Intent(this, ModificarClasificado.class );
         i.putExtra("idClasificado", clasificados.get(itemSeleccionado).getId());
         startActivity(i);
     }
-
-
-    //--------------------  Metodos de Carga de Categoria
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-        categoriaSeleccionada = position;
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0)
-    {
-        // TODO Auto-generated method stub
-    }
-    //--------------------------------------------------------------------------------
 }

@@ -5,85 +5,94 @@
     android:id="@+id/container"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TableLayout
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        android:layout_height="fill_parent">
 
-        <TableRow
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Usuario:"
-                android:id="@+id/textView"
-                android:layout_column="0"
-                android:layout_gravity="right" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_usuario"
-                android:layout_column="1"
-                android:layout_weight="1"
-                android:text="a" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Contraseña:"
-                android:id="@+id/textView2"
-                android:layout_column="0" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/et_password"
-                android:layout_column="1"
-                android:layout_weight="1"
-                android:text="a" />
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="26dp">
-
-        <Button
-            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Iniciar Sesion"
-            android:id="@+id/button"
-            android:onClick="iniciarSesion" />
+            android:layout_gravity="center">
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Registrarse"
-            android:id="@+id/button2"
-            android:onClick="registrarse" />
-    </LinearLayout>
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:id="@+id/tableLayout"
+                android:layout_margin="0dp">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button5"
-        android:id="@+id/button3"
-        android:layout_gravity="center_horizontal"
-        android:onClick="prueba" />
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Usuario:"
+                        android:id="@+id/textView"
+                        android:layout_column="0"
+                        android:layout_gravity="center_vertical|right" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_usuario"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:text="martin" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Contraseña:"
+                        android:id="@+id/textView2"
+                        android:layout_column="0" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/et_password"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:text="001" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="26dp"
+                android:id="@+id/linearLayout">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciar Sesion8"
+                    android:id="@+id/button"
+                    android:onClick="iniciarSesion" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Registrarse"
+                    android:id="@+id/button2"
+                    android:onClick="registrarse" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

@@ -32,6 +32,8 @@
         <activity android:name=".ListadoClasificados"></activity>
         <activity android:name=".DetalleClasificado"></activity>
         <activity android:name=".VerImagen"></activity>
+        <activity android:name=".MisClasificados"></activity>
+        <activity android:name=".ModificarClasificado"></activity>
     </application>
 
 </manifest>

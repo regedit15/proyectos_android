@@ -13,7 +13,8 @@ public class Home extends Activity
 {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
@@ -32,6 +33,12 @@ public class Home extends Activity
     public void listarClasificados(View view)
     {
         Intent i = new Intent(this, ListadoClasificados.class );
+        startActivity(i);
+    }
+
+    public void misClasificados(View view)
+    {
+        Intent i = new Intent(this, MisClasificados.class );
         startActivity(i);
     }
 
