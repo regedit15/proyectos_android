@@ -29,27 +29,27 @@
                     android:id="@+id/tableLayout" >
 
                     <TableRow
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="fill_parent" >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Titulo:13"
+                            android:text="Titulo:14"
                             android:id="@+id/textView"
                             android:layout_gravity="center_vertical|right" />
 
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/editText"
+                            android:id="@+id/et_titulo"
                             android:layout_weight="1"
                             android:layout_column="1" />
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/tableRow" >
 
@@ -63,12 +63,12 @@
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/editText2"
+                            android:id="@+id/et_descripcion"
                             android:layout_weight="1" />
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/tableRow2" >
 
@@ -85,12 +85,13 @@
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
                             android:ems="10"
-                            android:id="@+id/editText3"
-                            android:layout_weight="1" />
+                            android:id="@+id/et_precio"
+                            android:layout_weight="1"
+                            android:layout_span="2" />
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/tableRow3" >
 
@@ -103,14 +104,15 @@
                             android:layout_gravity="center_vertical|right" />
 
                         <Spinner
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/sp_categorias"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:layout_span="2" />
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/tableRow4"
                         android:layout_marginTop="25dp" >
@@ -122,6 +124,13 @@
                             android:text="Imagenes:"
                             android:id="@+id/textView5"
                             android:layout_gravity="center_vertical|right" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nueva Imagen"
+                            android:id="@+id/button2"
+                            android:layout_marginLeft="10dp" />
                     </TableRow>
                 </TableLayout>
 
@@ -130,6 +139,35 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/lv_imagenes" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar Imagenes"
+                    android:id="@+id/button"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="quitarImagenes" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="41dp">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar Clasificado"
+                    android:id="@+id/button4" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Modificar Clasificado"
+                    android:id="@+id/button3"
+                    android:layout_marginLeft="9dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

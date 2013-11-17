@@ -1,15 +1,13 @@
 package com.example.clasificados3;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -30,6 +28,10 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
     int categoriaSeleccionada;
     Clasificado clasificado = new Clasificado();
     ListView lv_imagenes;
+    EditText et_titulo;
+    EditText et_descripcion;
+    EditText et_precio;
+    ArrayList<String> imagenes = new ArrayList<String>();
 
 
     @Override
@@ -64,17 +66,61 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
         spinner.setAdapter(dataAdapter);
         //--------------------------------------------------------------
 
-        //se obtiene el clasificado segun el id obtenido por parametro
+
+
+        //------------- se obtiene el clasificado segun el id obtenido por parametro
         Bundle bundle = getIntent().getExtras();
 //        clasificado.setId(bundle.getInt("idClasificado"));
         clasificado.setId(49);
         clasificado = metodos.getClasificado(clasificado);
+        //---------------------------------------
+
+        //----- se setean los textos en funcion del clasificado
+        et_titulo = (EditText) findViewById(R.id.et_titulo);
+        et_descripcion = (EditText) findViewById(R.id.et_descripcion);
+        et_precio = (EditText) findViewById(R.id.et_precio);
+
+        et_titulo.setText(clasificado.getTitulo());
+        et_descripcion.setText(clasificado.getDescripcion());
+        et_precio.setText(clasificado.getPrecio().toString());
+        //-------------------------------------------------------------
+
+        //------ se guardan los nombre de las imagenes que posee el clasificado
+        for (int i=0; i < clasificado.getImagenes().size(); i++)
+        {
+            imagenes.add(clasificado.getImagenes().get(i).getNombre());
+        }
+        //-----------------------------
+
+
+        //carga las imagenes del clasificado al listView
+        cargarImagenes();
+
+
+    }
 
 
 
-        //--------------------------        Carga de clasificados
+    //quita las imagenes seleccionadas de la lista imagenes
+    public void quitarImagenes(View view)
+    {
+        ArrayList<Integer> indices = metodos.checkBoxSeleccionados(lv_imagenes, (CheckBox)lv_imagenes.findViewById(R.id.cb_checkBox));
 
-//        clasificados = metodos.getClasificados();
+        for (int i=0; i < indices.size(); i++)
+        {
+            int in = indices.get(i) - i;
+            clasificado.getImagenes().remove(in);
+        }
+        cargarImagenes();
+    }
+
+
+
+
+
+
+    public void cargarImagenes()
+    { //-----------------------  Carga de Imagenese del Clasificado
 
         lv_imagenes = (ListView)findViewById(R.id.lv_imagenes);
         lv_imagenes.setAdapter(new AdaptadorListado(this, R.layout.imagen_modificar_clasificado, clasificado.getImagenes()) {
@@ -91,63 +137,9 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
             }
         });
 
-
-        //se sobreescribe el metodo on click de la imagen
-//        lv_imagenes.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//        {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//            {
-//                eliminarImagen(position);
-//            }
-//        });
-
-
         //setea el largo de la lista en funcion de la suma del tamaño de todos sus hijos
-        setListViewHeightBasedOnChildren(lv_imagenes);
-
-
-
-
-
-
-
-
-    }
-
-
-    public void setListViewHeightBasedOnChildren(ListView listView)
-    {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
-
-
-
-    public void eliminarImagen(int posicion)
-    {
-        new AlertDialog.Builder(this)
-                .setTitle("" + posicion)
-                .setPositiveButton("Aceptar",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {}
-                        }).show();
+        metodos.setListViewHeightBasedOnChildren(lv_imagenes);
+        //--------------------------------------------------------------------------------
     }
 
     //--------------------   Categoria

@@ -2,6 +2,11 @@ package com.example.clasificados3.Controladores;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Clasificado;
@@ -377,6 +382,12 @@ public class Metodos
         }
         return lista;
     }
+
+    public void eliminarImagenPorClasificado(Clasificado x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_EliminarImagenesPorClasificado.php?id_clasificado=" + x.getId());
+    }
+
     //----------------------------------------------------------------
 
 
@@ -410,12 +421,12 @@ public class Metodos
         }
         return lista;
     }
-
     //-------------------------------------------------------------------------
 
 
     //------------------- Metodos para Cargar Una imagen desde una URL
-    public Drawable imageOperations(String url) {
+    public Drawable imageOperations(String url)
+    {
         try {
             InputStream is = (InputStream) this.fetch(url);
             Drawable d = Drawable.createFromStream(is, "src");
@@ -437,42 +448,49 @@ public class Metodos
 
 
 
+    //---------------------------- Metodos de List View
+
+    public ArrayList<Integer> checkBoxSeleccionados(ListView listView, CheckBox cbx2)
+    {
+        ArrayList<Integer> lista = new ArrayList<Integer>();
+        CheckBox cbx = (CheckBox)listView.findViewById(cbx2.getId());
+
+        int firstPosition = listView.getFirstVisiblePosition();
+        for(int i=firstPosition; i < listView.getCount(); i++)
+        {
+            View v1 = listView.getChildAt(i);
+            cbx = (CheckBox)v1.findViewById(cbx2.getId());
+            if(cbx.isChecked())
+            {
+                lista.add(i);
+            }
+        }
+        return lista;
+    }
 
 
+    public void setListViewHeightBasedOnChildren(ListView listView)
+    {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+        {
+            // pre-condition
+            return;
+        }
 
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++)
+        {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
 
-
-
-
-//
-//
-//    public void eliminarProducto(String id)
-//    {
-//        try
-//        {
-//            //httpGetData("http://10.0.2.2/prueba/eliminarProducto.php?id=" + ed_id.getText());
-//            httpGetData("http://" + ip + "/prueba/eliminarProducto.php?id=" + id);
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    public void modificarProducto(Producto x)
-//    {
-//        try
-//        {
-//            //httpGetData("http://10.0.2.2/prueba/modificarProducto.php?id=" + ed_id.getText() + "&nombre=" + ed_nombre.getText() + "&precio=" + ed_precio.getText());
-//            httpGetData("http://" + ip + "/prueba/modificarProducto.php?id=" + x.getId() + "&nombre=" + x.getNombre() + "&precio=" + x.getPrecio());
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+    //------------------------------------------------------------------------
 
 }
