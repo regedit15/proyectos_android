@@ -16,7 +16,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_horizontal"
-            android:id="@+id/layout_clasificado">
+            android:id="@+id/layout_clasificado"
+            android:background="#00bd2c">
 
             <TextView
                 android:layout_width="match_parent"
@@ -24,7 +25,10 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Titulo Clasificado"
                 android:id="@+id/tv_titulo"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:background="#72abcf"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -32,14 +36,19 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Descripcion"
                 android:id="@+id/tv_descripcion"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:background="#d6820d"
+                android:textColor="#FFFFFF"
+                android:textSize="22dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Precio"
-                android:id="@+id/tv_precio" />
+                android:id="@+id/tv_precio"
+                android:textSize="25dp"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </ScrollView>

@@ -2,7 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7441ff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,50 +11,52 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/et_usuario"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:textSize="25dp" />
 
-    <TableLayout
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#ffffff">
 
-        <TableRow
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ancho_de_botones"
                 android:text="Nuevo Clasificado"
                 android:id="@+id/button"
                 android:layout_column="0"
-                android:onClick="nuevoClasificado" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                android:onClick="nuevoClasificado"
+                style="@style/boton_el_tincho_naranja" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ancho_de_botones"
                 android:text="Listar Clasificados"
                 android:id="@+id/button2"
                 android:layout_column="0"
-                android:onClick="listarClasificados" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                android:onClick="listarClasificados"
+                android:layout_marginTop="20dp"
+                style="@style/boton_el_tincho_verde" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ancho_de_botones"
                 android:text="Mis Clasificados"
                 android:id="@+id/button3"
                 android:layout_column="0"
-                android:onClick="misClasificados" />
-        </TableRow>
+                android:onClick="misClasificados"
+                android:layout_marginTop="20dp"
+                style="@style/boton_el_tincho_azul" />
 
-    </TableLayout>
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>

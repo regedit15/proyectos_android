@@ -42,7 +42,7 @@ public class DetalleClasificado extends Activity
         //se setean los textviews
         tv_titulo.setText(clasificado.getTitulo());
         tv_descripcion.setText(clasificado.getDescripcion());
-        tv_precio.setText(clasificado.getPrecio().toString());
+        tv_precio.setText("Precio: $" + clasificado.getPrecio().toString());
 
         //se agregan las imagenes del clasificado al layout
         for (int i=0; i<clasificado.getImagenes().size(); i++)

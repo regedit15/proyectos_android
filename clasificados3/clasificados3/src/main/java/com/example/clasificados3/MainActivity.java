@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Usuario;
@@ -28,6 +30,8 @@ public class MainActivity extends ActionBarActivity
     public static ArrayList<Categoria> categorias;
     EditText et_usuario;
     EditText et_password;
+    ProgressBar pg_progressBar;
+
 
 
     @Override
@@ -36,23 +40,29 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        pg_progressBar = (ProgressBar)findViewById(R.id.pg_progressBar);
+        pg_progressBar.setVisibility(View.INVISIBLE);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
 
-        //----- Solucion Error HttpPost
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
-//        StrictMode.setThreadPolicy(policy);
+        //----- Solucion Error HttpPost. Solo para emmulador
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
+        StrictMode.setThreadPolicy(policy);
         //-------------------------------
+
         categorias = metodos.getCategorias();
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
 
 
-        Intent i = new Intent(this, ModificarClasificado.class );
-        startActivity(i);
+
+//        Intent i = new Intent(this, ModificarClasificado.class );
+//        startActivity(i);
+
     }
 
 
@@ -123,10 +133,6 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    public void prueba(View view)
-    {
-        Intent i = new Intent(this, DetalleClasificado.class );
-        startActivity(i);
-    }
+
 
 }

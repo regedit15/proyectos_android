@@ -17,12 +17,9 @@ import android.widget.Spinner;
 
 import com.example.clasificados3.Clases.Clasificado;
 import com.example.clasificados3.Clases.Imagen;
-import com.example.clasificados3.Controladores.HttpFileUploader;
 import com.example.clasificados3.Controladores.Metodos;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +104,7 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
 
             for (int i = 0; i < pathImagenes.size(); i++)
             {
-                uploadFile(pathImagenes.get(i));
+                metodos.uploadFile(pathImagenes.get(i));
 
                 Imagen imagen = new Imagen();
 
@@ -151,7 +148,7 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
 
     public void cancelar(View view)
     {
-        Intent i = new Intent(this, MainActivity.class );
+        Intent i = new Intent(this, Home.class );
         startActivity(i);
     }
 
@@ -184,23 +181,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
 
 
     //------------ Metodos Subir imagen e Intent
-
-    //se le pasa el path de la imagen y la sube al servidor
-    public void uploadFile(String filename)
-    {
-        String nombreArchivo = "";
-        try
-        {
-            FileInputStream fis = new FileInputStream(filename);
-            HttpFileUploader htfu = new HttpFileUploader("http://10.0.0.3/prueba/Clasificados_SubirImagen.php","noparamshere", filename);
-            htfu.doStart(fis);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (resultCode == RESULT_OK) {

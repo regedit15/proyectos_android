@@ -36,7 +36,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Titulo:14"
+                            android:text="Titulo:"
                             android:id="@+id/textView"
                             android:layout_gravity="center_vertical|right" />
 
@@ -126,26 +126,31 @@
                             android:layout_gravity="center_vertical|right" />
 
                         <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="190dp"
+                            android:layout_height="@dimen/ancho_de_botones"
                             android:text="Nueva Imagen"
                             android:id="@+id/button2"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:onClick="seleccionarImagen"
+                            style="@style/boton_el_tincho_verde" />
                     </TableRow>
                 </TableLayout>
 
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lv_imagenes" />
+                    android:id="@+id/lv_imagenes"
+                    android:layout_marginTop="34dp" />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="203dp"
+                    android:layout_height="@dimen/ancho_de_botones"
                     android:text="Eliminar Imagenes"
                     android:id="@+id/button"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="quitarImagenes" />
+                    android:onClick="confirmarQuitarImagenes"
+                    android:layout_marginTop="14dp"
+                    style="@style/boton_el_tincho_rojo" />
 
             </LinearLayout>
 
@@ -154,21 +159,34 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="41dp">
+                android:layout_marginTop="52dp">
 
                 <Button
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Eliminar Clasificado"
-                    android:id="@+id/button4" />
-
-                <Button
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:text="Modificar Clasificado"
                     android:id="@+id/button3"
-                    android:layout_marginLeft="9dp" />
+                    android:onClick="confirmarModificacionDeClasificado"
+                    style="@style/boton_el_tincho_azul" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:text="Eliminar Clasificado"
+                    android:id="@+id/button4"
+                    android:layout_marginLeft="11dp"
+                    style="@style/boton_el_tincho_rojo"
+                    android:onClick="confirmarEliminacionDeClasificado" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pg_progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_gravity="center_vertical|center"
+        android:indeterminate="false" />
 </FrameLayout>

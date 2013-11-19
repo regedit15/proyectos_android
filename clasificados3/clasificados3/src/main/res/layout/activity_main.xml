@@ -80,19 +80,33 @@
 
                 <Button
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Iniciar Sesion8"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Iniciar Sesion"
                     android:id="@+id/button"
-                    android:onClick="iniciarSesion" />
+                    android:onClick="iniciarSesion"
+                    android:background="#0085c5"
+                    android:textSize="20dp"
+                    android:textColor="#ffffff" />
 
                 <Button
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/ancho_de_botones"
                     android:text="Registrarse"
                     android:id="@+id/button2"
-                    android:onClick="registrarse" />
+                    android:onClick="registrarse"
+                    android:layout_marginLeft="14dp"
+                    style="@style/boton_el_tincho_verde" />
             </LinearLayout>
 
         </LinearLayout>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pg_progressBar"
+            android:layout_gravity="center_horizontal|center"
+            android:indeterminate="false" />
+
     </FrameLayout>
 </LinearLayout>

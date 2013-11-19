@@ -24,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -167,7 +169,7 @@ public class Metodos
     {
         int id = 0;
 
-        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_InsertarClasificado.php?id_usuario="+ MainActivity.usuario.getId() +"&titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&imagen=" + x.getImagenes() + "&id_categoria=" + x.getCategoria().getId());
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_InsertarClasificado.php?id_usuario="+ MainActivity.usuario.getId() +"&titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&id_categoria=" + x.getCategoria().getId());
 
         try
         {
@@ -181,6 +183,17 @@ public class Metodos
             e.printStackTrace();
         }
         return id;
+    }
+
+    public void modificarClasificado(Clasificado x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_ModificarClasificado.php?id=" + x.getId() + "&titulo=" + x.getTitulo() + "&descripcion=" + x.getDescripcion() + "&precio=" + x.getPrecio() + "&id_categoria=" + x.getCategoria().getId());
+    }
+
+    public void eliminarClasificado(Clasificado x)
+    {
+        eliminarImagenPorClasificado(x);
+        httpGetData("http://" + ip + "/prueba/Clasificados_EliminarClasificado.php?id=" + x.getId());
     }
 
     public ArrayList<Clasificado> getClasificados()
@@ -298,6 +311,7 @@ public class Metodos
             String titulo = jsonChildNode.optString("titulo");
             String descripcion = jsonChildNode.optString("descripcion");
             Double precio = jsonChildNode.optDouble("precio");
+            int idCategoria = jsonChildNode.optInt("id_categoria");
 
             x.setId(id);
 
@@ -310,6 +324,10 @@ public class Metodos
             x.setDescripcion(descripcion);
 
             x.setPrecio(precio);
+
+            Categoria categoria = new Categoria();
+            categoria.setId(idCategoria);
+            x.setCategoria(categoria);
 
             ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
             x.setImagenes(imagenes);
@@ -347,6 +365,22 @@ public class Metodos
     }
 
 
+    //se le pasa el path de la imagen y la sube al servidor
+    public void uploadFile(String filename)
+    {
+        try
+        {
+            FileInputStream fis = new FileInputStream(filename);
+            HttpFileUploader htfu = new HttpFileUploader("http://10.0.0.3/prueba/Clasificados_SubirImagen.php","noparamshere", filename);
+            htfu.doStart(fis);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
     public ArrayList<Imagen> getImagenesPorClasificado(Clasificado clasificado)
     {
         String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetImagenesPorClasificado.php?id_clasificado=" + clasificado.getId());
@@ -381,6 +415,11 @@ public class Metodos
             e.printStackTrace();
         }
         return lista;
+    }
+
+    public void eliminarImagen(Imagen x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_EliminarImagen.php?id=" + x.getId());
     }
 
     public void eliminarImagenPorClasificado(Clasificado x)
