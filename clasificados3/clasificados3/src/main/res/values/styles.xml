@@ -8,7 +8,7 @@
 
     <style name="boton_el_tincho_azul">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">#0085c5</item>
+        <item name="android:background">#ff00a7d7</item>
         <item name="android:textSize">22dp</item>
     </style>
 
@@ -27,7 +27,7 @@
 
     <style name="boton_el_tincho_naranja">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">#ffc67a05</item>
+        <item name="android:background">#ffd8c201</item>
         <item name="android:textSize">22dp</item>
     </style>
 

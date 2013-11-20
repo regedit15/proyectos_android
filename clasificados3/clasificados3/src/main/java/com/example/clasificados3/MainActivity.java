@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity
     public static String pathImagenesServidor = "http://" + MainActivity.ip + "/prueba/uploads/";
     public static Usuario usuario = new Usuario();
     Metodos metodos = new Metodos(ip);
-    public static ArrayList<Categoria> categorias;
+    public static ArrayList<Categoria> categorias = new ArrayList<Categoria>();
     EditText et_usuario;
     EditText et_password;
     ProgressBar pg_progressBar;
@@ -54,11 +54,25 @@ public class MainActivity extends ActionBarActivity
         StrictMode.setThreadPolicy(policy);
         //-------------------------------
 
-        categorias = metodos.getCategorias();
+
+        //------ se cargan las categorias + la categoria todas, con id -1
+        Categoria todas = new Categoria();
+        todas.setId(-1);
+        todas.setNombre("Todas");
+
+        categorias.add(todas);
+
+        ArrayList<Categoria> categoriasBD = metodos.getCategorias();
+        for(int i=0; i < categoriasBD.size(); i++)
+        {
+            categorias.add(categoriasBD.get(i));
+        }
+        //----------------------------------------------------------------------
+
+
+
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
-
-
 
 //        Intent i = new Intent(this, ModificarClasificado.class );
 //        startActivity(i);

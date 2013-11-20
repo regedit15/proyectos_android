@@ -214,7 +214,7 @@ public class Metodos
                 String titulo = jsonChildNode.optString("titulo");
                 String descripcion = jsonChildNode.optString("descripcion");
                 Double precio = jsonChildNode.optDouble("precio");
-//                int idCategoria = jsonChildNode.optInt("id_categoria");
+                int idCategoria = jsonChildNode.optInt("id_categoria");
 
                 Clasificado x = new Clasificado();
 
@@ -233,11 +233,65 @@ public class Metodos
                 ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
                 x.setImagenes(imagenes);
 
+
+                Categoria categoria = new Categoria();
+                categoria.setId(idCategoria);
                 //quitado para mejorar performance
-//                Categoria categoria = new Categoria();
-//                categoria.setId(idCategoria);
 //                categoria = getCategoria(categoria);
-//                x.setCategoria(categoria);
+                x.setCategoria(categoria);
+
+                lista.add(x);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public ArrayList<Clasificado> getClasificadosPorCategoria(Categoria c)
+    {
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetClasificadosPorCategoria.php?id_categoria=" + c.getId());
+        ArrayList<Clasificado> lista = new ArrayList<Clasificado>();
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("lista");
+
+
+            for(int i = 0; i < jsonMainNode.length(); i++)
+            {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                int id = jsonChildNode.optInt("id");
+                int idUsuario = jsonChildNode.optInt("id_usuario");
+                String titulo = jsonChildNode.optString("titulo");
+                String descripcion = jsonChildNode.optString("descripcion");
+                Double precio = jsonChildNode.optDouble("precio");
+                int idCategoria = jsonChildNode.optInt("id_categoria");
+
+                Clasificado x = new Clasificado();
+
+                x.setId(id);
+
+                Usuario usuario = new Usuario();
+                usuario.setId(idUsuario);
+                x.setUsuario(usuario);
+
+                x.setTitulo(titulo);
+
+                x.setDescripcion(descripcion);
+
+                x.setPrecio(precio);
+
+                ArrayList<Imagen> imagenes = getImagenesPorClasificado(x);
+                x.setImagenes(imagenes);
+
+                Categoria categoria = new Categoria();
+                categoria.setId(idCategoria);
+                //quitado para mejorar performance
+//                categoria = getCategoria(categoria);
+                x.setCategoria(categoria);
 
                 lista.add(x);
             }

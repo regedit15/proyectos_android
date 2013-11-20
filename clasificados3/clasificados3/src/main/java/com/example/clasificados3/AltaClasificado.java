@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Clasificado;
 import com.example.clasificados3.Clases.Imagen;
 import com.example.clasificados3.Controladores.Metodos;
@@ -51,9 +52,8 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         et_descripcion = (EditText)findViewById(R.id.et_descripcion);
         et_precio = (EditText)findViewById(R.id.et_precio);
 
-
-
-
+        ArrayList<Categoria> categorias = MainActivity.categorias;
+        categorias.remove(0);
         //------ Cargar combo/spinner Categoria
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.sp_categorias);
@@ -64,9 +64,9 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         // Spinner Drop down elements
         List<String> items = new ArrayList <String>();
 
-        for (int i = 0; i < MainActivity.categorias.size() ;i++)
+        for (int i = 0; i < categorias.size() ;i++)
         {
-            items.add(MainActivity.categorias.get(i).getNombre());
+            items.add(categorias.get(i).getNombre());
         }
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
@@ -141,9 +141,8 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
                             }).show();
         }
 
-        et_titulo.setText("");
-        et_descripcion.setText("");
-        et_precio.setText("");
+        Intent i = new Intent(this, Home.class );
+        startActivity(i);
     }
 
     public void cancelar(View view)

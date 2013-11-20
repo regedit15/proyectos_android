@@ -14,7 +14,7 @@
         android:layout_gravity="right"
         android:textColor="#ffffff"
         android:textStyle="italic"
-        android:textSize="25dp" />
+        android:textSize="19dp" />
 
     <FrameLayout
         android:layout_width="fill_parent"

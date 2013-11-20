@@ -122,6 +122,7 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
             if (clasificado.getCategoria().getId() == MainActivity.categorias.get(i).getId())
             {
                 spinner.setSelection(i);
+                break;
             }
         }
 
@@ -129,8 +130,6 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
 
 
     //------------------------------------- Metodos
-
-
 
     public void eliminarClasificado()
     {
@@ -153,27 +152,11 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
             {
                 Imagen i2 = clasificado.getImagenes().get(b);
 
-                if(i2.getId() == 0)
+                if (i1.getId() == i2.getId())
                 {
-                    if(a == 0)
-                    {
-                        //insertar imagen nueva, porque esta imagen no tiene id (id=0)
-                        //por lo tanto es una nueva imagen
-                        Clasificado x = new Clasificado();
-
-                        x.setId(clasificado.getId());
-                        i2.setClasificado(x);
-
-                        metodos.insertarImagen(i2);
-                    }
+                    eliminarImagen = 0;
                 }
-                else
-                {
-                    if (i1.getId() == i2.getId())
-                    {
-                        eliminarImagen = 0;
-                    }
-                }
+
             }
             //eliminar imagen vieja
             if (eliminarImagen == 1)
@@ -181,6 +164,29 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
                 //si la imagen vieja, no se encuentra en la nueva lista de imagenes
                 //quiere decir que el usuario la borro, entonces se elimina de la base de datos
                 metodos.eliminarImagen(i1);
+            }
+        }
+
+
+
+
+
+
+
+        for (int a=0; a < clasificado.getImagenes().size(); a++)
+        {
+            Imagen i1 = clasificado.getImagenes().get(a);
+
+            if(i1.getId() == 0)
+            {
+                //insertar imagen nueva, porque esta imagen no tiene id (id=0)
+                //por lo tanto es una nueva imagen
+                Clasificado x = new Clasificado();
+
+                x.setId(clasificado.getId());
+                i1.setClasificado(x);
+
+                metodos.insertarImagen(i1);
             }
         }
 

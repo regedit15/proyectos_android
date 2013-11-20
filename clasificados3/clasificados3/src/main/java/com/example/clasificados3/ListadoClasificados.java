@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Clases.Clasificado;
 import com.example.clasificados3.Clases_Auxiliares.AdaptadorListado;
 import com.example.clasificados3.Controladores.Metodos;
@@ -38,6 +39,7 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
         setContentView(R.layout.listado_clasificados);
 
 
+        clasificados = metodos.getClasificados();
 
         //------ Cargar combo/spinner Categoria
         // Spinner element
@@ -64,12 +66,43 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
         //--------------------------------------------------------------
 
 
+        cargarClasificados();
+    }
 
-        //--------------------------        Carga de clasificados
-        clasificados = metodos.getClasificados();
 
+
+
+    public void verClasificado(int itemSeleccionado)
+    {
+        Intent i = new Intent(this, DetalleClasificado.class );
+        i.putExtra("idClasificado", clasificados.get(itemSeleccionado).getId());
+        startActivity(i);
+    }
+
+    public void cargarClasificados()
+    {
+        ArrayList<Clasificado> clasificados_a_listar = new ArrayList<Clasificado>();
+
+        Categoria c = MainActivity.categorias.get(categoriaSeleccionada);
+
+        if (c.getId() == -1)
+        {
+            clasificados_a_listar = clasificados;
+        }
+        else
+        {
+            for(int i=0; i < clasificados.size(); i++)
+            {
+                if(c.getId() == clasificados.get(i).getCategoria().getId())
+                {
+                    clasificados_a_listar.add(clasificados.get(i));
+                }
+            }
+        }
+
+        //--------------------------     Carga de clasificados
         lv_clasificados = (ListView)findViewById(R.id.lv_clasificados);
-        lv_clasificados.setAdapter(new AdaptadorListado(this, R.layout.fila, clasificados) {
+        lv_clasificados.setAdapter(new AdaptadorListado(this, R.layout.fila, clasificados_a_listar) {
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null)
@@ -105,25 +138,14 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
                 verClasificado(position);
             }
         });
-
     }
-
-
-
-
-    public void verClasificado(int itemSeleccionado)
-    {
-        Intent i = new Intent(this, DetalleClasificado.class );
-        i.putExtra("idClasificado", clasificados.get(itemSeleccionado).getId());
-        startActivity(i);
-    }
-
 
     //--------------------  Metodos de Carga de Categoria
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
         categoriaSeleccionada = position;
+        cargarClasificados();
     }
 
     public void onNothingSelected(AdapterView<?> arg0)
