@@ -45,7 +45,6 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
     ArrayList<Imagen> imagenesAntesDeModificar = new ArrayList<Imagen>();
     int SELECT_PICTURE = 1;
     ProgressBar pg_progressBar;
-    public static int ploplo = 1;
 
 
 

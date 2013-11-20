@@ -75,9 +75,12 @@ public class Metodos
 
 
     //--------------------- Metodos de Usuario
+
+    //si devuelve 0 es porque el nombre de usuario no existe y vice
     public int validarNombreUsuario(String usuario)
     {
         int x = 0;
+        //guarda la respuyesta de la consulta
         String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarNombreUsuario.php?usuario=" + usuario);
 
         try
@@ -94,6 +97,7 @@ public class Metodos
         return x;
     }
 
+    //si devuelve 0 es porque el usuario no existe y vice
     public int validarUsuario(String usuario, String password)
     {
         int x = 0;
@@ -111,15 +115,13 @@ public class Metodos
             e.printStackTrace();
         }
         return x;
-
     }
 
     public int insertarUsuario(Usuario x)
     {
         int id = 0;
 
-        String popo = "http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo();
-        String jsonResult = httpGetData(popo);
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_RegistrarUsuario.php?usuario=" + x.getUsuario() + "&password=" + x.getPassword() + "&correo=" + x.getCorreo());
 
         try
         {
@@ -135,6 +137,7 @@ public class Metodos
         return id;
     }
 
+    //basado en el nombre devuelve el objeto entero
     public Usuario getUsuario(String nombreUsuario)
     {
         String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_GetUsuario.php?usuario=" + nombreUsuario);
@@ -192,7 +195,6 @@ public class Metodos
 
     public void eliminarClasificado(Clasificado x)
     {
-        eliminarImagenPorClasificado(x);
         httpGetData("http://" + ip + "/prueba/Clasificados_EliminarClasificado.php?id=" + x.getId());
     }
 
@@ -543,6 +545,7 @@ public class Metodos
 
     //---------------------------- Metodos de List View
 
+    //devuelve la lista de las posiciones de los checkbox seleccionados
     public ArrayList<Integer> checkBoxSeleccionados(ListView listView, CheckBox cbx2)
     {
         ArrayList<Integer> lista = new ArrayList<Integer>();
@@ -562,6 +565,7 @@ public class Metodos
     }
 
 
+    //setea el largo en funcion de los items que tenga
     public void setListViewHeightBasedOnChildren(ListView listView)
     {
         ListAdapter listAdapter = listView.getAdapter();

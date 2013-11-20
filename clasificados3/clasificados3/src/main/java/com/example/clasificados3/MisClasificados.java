@@ -32,7 +32,7 @@ public class MisClasificados extends Activity
         setContentView(R.layout.mis_clasificados);
 
 
-        //--------------------------        Carga de clasificados
+        //--------------------------        Carga de clasificados por Usuario
         clasificados = metodos.getClasificadosPorUsuario(MainActivity.usuario);
 
         lv_misClasificados = (ListView)findViewById(R.id.lv_misClasificados);
@@ -64,20 +64,20 @@ public class MisClasificados extends Activity
             }
         });
 
-        //se sobreescribe el metodo on click de la imagen
+        //se sobreescribe el metodo on click de la fila
         lv_misClasificados.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                verClasificado(position);
+                irAModificarClasificado(position);
             }
         });
 
     }
 
 
-    public void verClasificado(int itemSeleccionado)
+    public void irAModificarClasificado(int itemSeleccionado)
     {
         Intent i = new Intent(this, ModificarClasificado.class );
         i.putExtra("idClasificado", clasificados.get(itemSeleccionado).getId());

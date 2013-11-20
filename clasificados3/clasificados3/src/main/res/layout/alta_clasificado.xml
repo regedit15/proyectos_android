@@ -153,6 +153,14 @@
                     </TableRow>
                 </TableLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="63dp">
+
                 <Button
                     android:layout_width="295dp"
                     android:layout_height="@dimen/ancho_de_botones"
@@ -161,7 +169,6 @@
                     android:layout_column="0"
                     android:onClick="nuevoClasificado"
                     style="@style/boton_el_tincho_azul"
-                    android:layout_marginTop="63dp"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
         </LinearLayout>

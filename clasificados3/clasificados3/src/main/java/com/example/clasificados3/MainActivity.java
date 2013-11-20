@@ -26,12 +26,11 @@ public class MainActivity extends ActionBarActivity
     public static String ip = "10.0.0.3";
     public static String pathImagenesServidor = "http://" + MainActivity.ip + "/prueba/uploads/";
     public static Usuario usuario = new Usuario();
-    Metodos metodos = new Metodos(ip);
     public static ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+    Metodos metodos = new Metodos(ip);
     EditText et_usuario;
     EditText et_password;
     ProgressBar pg_progressBar;
-
 
 
     @Override
@@ -40,8 +39,6 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pg_progressBar = (ProgressBar)findViewById(R.id.pg_progressBar);
-        pg_progressBar.setVisibility(View.INVISIBLE);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -55,7 +52,7 @@ public class MainActivity extends ActionBarActivity
         //-------------------------------
 
 
-        //------ se cargan las categorias + la categoria todas, con id -1
+        //------ se cargan las categorias + la categoria Todas, con id -1
         Categoria todas = new Categoria();
         todas.setId(-1);
         todas.setNombre("Todas");
@@ -70,12 +67,15 @@ public class MainActivity extends ActionBarActivity
         //----------------------------------------------------------------------
 
 
-
+        //se obtienen las variables de texto del layout y la barra de progrese
         et_usuario = (EditText)findViewById(R.id.et_usuario);
         et_password = (EditText)findViewById(R.id.et_password);
+        pg_progressBar = (ProgressBar)findViewById(R.id.pg_progressBar);
 
 //        Intent i = new Intent(this, ModificarClasificado.class );
 //        startActivity(i);
+
+        pg_progressBar.setVisibility(View.INVISIBLE);
 
     }
 
@@ -116,6 +116,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    //----------------------------------------------- Metodos
 
     public void registrarse(View view)
     {
@@ -125,10 +126,12 @@ public class MainActivity extends ActionBarActivity
 
     public void iniciarSesion(View view)
     {
+        //asigna un 0 si no existe y un 1 si existe
         int x = metodos.validarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
 
         if(x == 1)
         {
+            //se guar
             usuario = metodos.getUsuario(et_usuario.getText().toString());
 
             Intent i = new Intent(this, Home.class );

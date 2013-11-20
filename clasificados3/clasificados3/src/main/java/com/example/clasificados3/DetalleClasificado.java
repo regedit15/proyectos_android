@@ -70,8 +70,6 @@ public class DetalleClasificado extends Activity
     }
 
 
-
-
     public void verImagen(String pathImagen)
     {
         Intent i = new Intent(this, VerImagen.class );

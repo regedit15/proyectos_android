@@ -79,8 +79,11 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
         startActivity(i);
     }
 
+
     public void cargarClasificados()
     {
+
+        //filtra los clasificados por categoria
         ArrayList<Clasificado> clasificados_a_listar = new ArrayList<Clasificado>();
 
         Categoria c = MainActivity.categorias.get(categoriaSeleccionada);
@@ -118,8 +121,9 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
                     }
 
                     ImageView iv_imagen = (ImageView) view.findViewById(R.id.iv_imagen);
-                    if (iv_imagen != null) {
-                        //se muestra solo la primer imagen, si es que tiene
+                    if (iv_imagen != null)
+                    {
+                        //se muestra la primer imagen, si es que tiene
                         if (((Clasificado) entrada).getImagenes().size() > 0)
                         {
                             iv_imagen.setImageDrawable(metodos.imageOperations(MainActivity.pathImagenesServidor + ((Clasificado) entrada).getImagenes().get(0).getNombre()));
@@ -129,7 +133,7 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
             }
         });
 
-        //se sobreescribe el metodo on click de la imagen
+        //se sobreescribe el metodo on click de la fila y te envia al detalle del clasificado
         lv_clasificados.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

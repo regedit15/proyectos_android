@@ -43,7 +43,7 @@
                 android:id="@+id/button2"
                 android:layout_column="0"
                 android:onClick="listarClasificados"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 style="@style/boton_el_tincho_verde" />
 
             <Button
@@ -53,7 +53,7 @@
                 android:id="@+id/button3"
                 android:layout_column="0"
                 android:onClick="misClasificados"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 style="@style/boton_el_tincho_azul" />
 
         </LinearLayout>

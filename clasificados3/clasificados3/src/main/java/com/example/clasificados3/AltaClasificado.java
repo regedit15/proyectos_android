@@ -51,6 +51,7 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         et_titulo = (EditText)findViewById(R.id.et_titulo);
         et_descripcion = (EditText)findViewById(R.id.et_descripcion);
         et_precio = (EditText)findViewById(R.id.et_precio);
+        img = (ImageView)findViewById(R.id.iv_imagen1);
 
         ArrayList<Categoria> categorias = MainActivity.categorias;
         categorias.remove(0);
@@ -78,10 +79,11 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         spinner.setAdapter(dataAdapter);
         //--------------------------------------------------------------
 
-        img = (ImageView)findViewById(R.id.iv_imagen1);
     }
 
 
+
+    //-------------------------------------------  Metodos
 
 
     //-------------------------------- Butones
@@ -117,14 +119,14 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
                 metodos.insertarImagen(imagen);
             }
 
-            pathImagenes.clear();
-
             new AlertDialog.Builder(this)
                     .setTitle("Se ha creado un nuevo clasificado")
                     .setPositiveButton("Aceptar",
                             new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    volverHome();
                                 }
                             }).show();
         }
@@ -140,7 +142,10 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
                                 public void onClick(DialogInterface dialog, int which) {}
                             }).show();
         }
+    }
 
+    public void volverHome()
+    {
         Intent i = new Intent(this, Home.class );
         startActivity(i);
     }
@@ -151,14 +156,14 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         startActivity(i);
     }
 
+    //visor galeria
     public void seleccionarImagen(View view)
     {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
+        startActivityForResult(Intent.createChooser(intent,"Seleccionar Imagen"), SELECT_PICTURE);
     }
-
     //-------------------------------------------------------------
 
 
@@ -185,16 +190,17 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
-//                selectedImagePath = getPath(selectedImageUri);
 
-//                System.out.println("Image Path : " + selectedImagePath);
+                //se setea la imeagen seleccionada
                 img.setImageURI(selectedImageUri);
 
+                //agrega el path a la lista
                 pathImagenes.add(getPath(selectedImageUri));
             }
         }
     }
 
+    //metodo para obtener el path
     public String getPath(Uri uri)
     {
         String[] projection = { MediaStore.Images.Media.DATA };

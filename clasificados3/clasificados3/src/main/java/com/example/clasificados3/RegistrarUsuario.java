@@ -38,7 +38,7 @@ public class RegistrarUsuario extends Activity
 
     public void registrarUsuario(View view)
     {
-
+        //el metodo validarNombreUsuario devuelve 0 si no existe el nombre del usuario
         if (metodos.validarNombreUsuario(et_usuario.getText().toString()) == 0)
         {
             Usuario x = new Usuario();
