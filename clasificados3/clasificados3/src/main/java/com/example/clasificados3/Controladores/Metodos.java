@@ -568,13 +568,12 @@ public class Metodos
     public ArrayList<Integer> checkBoxSeleccionados(ListView listView, CheckBox cbx2)
     {
         ArrayList<Integer> lista = new ArrayList<Integer>();
-        CheckBox cbx = (CheckBox)listView.findViewById(cbx2.getId());
 
         int firstPosition = listView.getFirstVisiblePosition();
         for(int i=firstPosition; i < listView.getCount(); i++)
         {
             View v1 = listView.getChildAt(i);
-            cbx = (CheckBox)v1.findViewById(cbx2.getId());
+            CheckBox cbx = (CheckBox)v1.findViewById(cbx2.getId());
             if(cbx.isChecked())
             {
                 lista.add(i);
