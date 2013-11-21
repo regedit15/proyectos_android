@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.clasificados3.Clases.Categoria;
@@ -39,6 +40,8 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
     List<String> pathImagenes = new ArrayList <String>();
 
 
+    ProgressBar pg_progressBar;
+
     private static final int SELECT_PICTURE = 1;
     private ImageView img;
     @Override
@@ -52,6 +55,9 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         et_descripcion = (EditText)findViewById(R.id.et_descripcion);
         et_precio = (EditText)findViewById(R.id.et_precio);
         img = (ImageView)findViewById(R.id.iv_imagen1);
+        pg_progressBar = (ProgressBar)findViewById(R.id.pg_progressBar);
+
+        pg_progressBar.setVisibility(View.INVISIBLE);
 
         ArrayList<Categoria> categorias = MainActivity.categorias;
         categorias.remove(0);
@@ -89,71 +95,86 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
     //-------------------------------- Butones
     public void nuevoClasificado(View view)
     {
-        Clasificado x = new Clasificado();
-
-        x.setUsuario(MainActivity.usuario);
-        x.setTitulo(et_titulo.getText().toString());
-        x.setDescripcion(et_descripcion.getText().toString());
-        x.setPrecio(Double.parseDouble(et_precio.getText().toString()));
-        x.setCategoria(MainActivity.categorias.get(categoriaSeleccionada));
-
-        try
+        pg_progressBar.setVisibility(View.VISIBLE);
+        if (!et_titulo.getText().toString().equals("") && !et_descripcion.getText().toString().equals("") && !et_precio.getText().toString().equals(""))
         {
-            int idClasificado = metodos.insertarClasificado(x);
+            Clasificado x = new Clasificado();
 
-            Clasificado claisficado = new Clasificado();
-            claisficado.setId(idClasificado);
+            x.setUsuario(MainActivity.usuario);
+            x.setTitulo(et_titulo.getText().toString());
+            x.setDescripcion(et_descripcion.getText().toString());
+            x.setPrecio(Double.parseDouble(et_precio.getText().toString()));
+            x.setCategoria(MainActivity.categorias.get(categoriaSeleccionada));
 
-            for (int i = 0; i < pathImagenes.size(); i++)
+            try
             {
-                metodos.uploadFile(pathImagenes.get(i));
+                int idClasificado = metodos.insertarClasificado(x);
 
-                Imagen imagen = new Imagen();
+                Clasificado claisficado = new Clasificado();
+                claisficado.setId(idClasificado);
 
-                imagen.setClasificado(claisficado);
+                for (int i = 0; i < pathImagenes.size(); i++)
+                {
+                    metodos.uploadFile(pathImagenes.get(i));
 
-                //se extrae el nombre del archivo desde el path
-                File f = new File(pathImagenes.get(i));
-                imagen.setNombre(f.getName());
+                    Imagen imagen = new Imagen();
 
-                metodos.insertarImagen(imagen);
+                    imagen.setClasificado(claisficado);
+
+                    //se extrae el nombre del archivo desde el path
+                    File f = new File(pathImagenes.get(i));
+                    imagen.setNombre(f.getName());
+
+                    metodos.insertarImagen(imagen);
+                }
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Se ha creado un nuevo clasificado")
+                        .setPositiveButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        volverAlHome();
+                                    }
+                                }).show();
             }
+            catch (Exception e)
+            {
+                e.printStackTrace();
 
-            new AlertDialog.Builder(this)
-                    .setTitle("Se ha creado un nuevo clasificado")
-                    .setPositiveButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which)
-                                {
-                                    volverHome();
-                                }
-                            }).show();
+                new AlertDialog.Builder(this)
+                        .setTitle("Error...")
+                        .setPositiveButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {}
+                                }).show();
+            }
         }
-        catch (Exception e)
+        else
         {
-            e.printStackTrace();
-
             new AlertDialog.Builder(this)
-                    .setTitle("Error...")
+                    .setTitle("Complete todos los campos!")
                     .setPositiveButton("Aceptar",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {}
                             }).show();
         }
+        pg_progressBar.setVisibility(View.INVISIBLE);
     }
 
-    public void volverHome()
+    public void volverAlHome()
     {
         Intent i = new Intent(this, Home.class );
         startActivity(i);
     }
+
 
     public void cancelar(View view)
     {
-        Intent i = new Intent(this, Home.class );
-        startActivity(i);
+        volverAlHome();
     }
 
     //visor galeria
@@ -179,10 +200,6 @@ public class AltaClasificado extends Activity implements AdapterView.OnItemSelec
         // TODO Auto-generated method stub
     }
     //--------------------------------------------------------------------------------
-
-
-
-
 
     //------------ Metodos Subir imagen e Intent
     public void onActivityResult(int requestCode, int resultCode, Intent data)

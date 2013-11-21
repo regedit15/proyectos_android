@@ -5,18 +5,17 @@
     android:layout_height="match_parent">
 
     <Button
-        android:layout_width="132dp"
+        style="@style/boton_el_tincho_gris"
+        android:layout_width="97dp"
         android:layout_height="@dimen/ancho_de_botones"
         android:text="Volver"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
-        style="@style/boton_el_tincho_gris"
         android:onClick="volver" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_misClasificados"
-        android:layout_weight="1" />
+        android:id="@+id/lv_categorias" />
 
 </LinearLayout>

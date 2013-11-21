@@ -48,24 +48,27 @@ public class Metodos
     {
         String response="";
         mURL=mURL.replace(" ", "%20");
-        Log.i("LocAndroid Response HTTP Threas", "Ejecutando get 0: " + mURL);
+//        Log.i("LocAndroid Response HTTP Threas", "Ejecutando get 0: " + mURL);
         HttpClient httpclient = new DefaultHttpClient();
 
-        Log.i("LocAndroid Response HTTP Thread","Ejecutando get 1");
+//        Log.i("LocAndroid Response HTTP Thread","Ejecutando get 1");
         HttpGet httppost = new HttpGet(mURL);
         Log.i("LocAndroid Response HTTP Thread","Ejecutando get 2");
         try
         {
 
-            Log.i("LocAndroid Response HTTP","Ejecutando get");
+//            Log.i("LocAndroid Response HTTP","Ejecutando get");
             // Execute HTTP Post Request
             ResponseHandler<String> responseHandler=new BasicResponseHandler();
             response = httpclient.execute(httppost,responseHandler);
-            Log.i("LocAndroid Response HTTP",response);
-        } catch (ClientProtocolException e) {
+//            Log.i("LocAndroid Response HTTP",response);
+        }
+        catch (ClientProtocolException e)
+        {
             Log.i("LocAndroid Response HTTP ERROR 1",e.getMessage());
             // TODO Auto-generated catch block
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
 
             Log.i("LocAndroid Response HTTP ERROR 2", e.getMessage());
             // TODO Auto-generated catch block
@@ -98,10 +101,10 @@ public class Metodos
     }
 
     //si devuelve 0 es porque el usuario no existe y vice
-    public int validarUsuario(String usuario, String password)
+    public int validarUsuario(Usuario usuario)
     {
         int x = 0;
-        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarUsuario.php?usuario=" + usuario + "&password=" + password);
+        String jsonResult = httpGetData("http://" + ip + "/prueba/Clasificados_ValidarUsuario.php?usuario=" + usuario.getUsuario() + "&password=" + usuario.getPassword());
 
         try
         {
@@ -152,11 +155,12 @@ public class Metodos
             int id = jsonChildNode.optInt("id");
             String usuario = jsonChildNode.optString("usuario");
             String password = jsonChildNode.optString("password");
+            int admin = jsonChildNode.optInt("admin");
 
             x.setId(id);
             x.setUsuario(usuario);
             x.setPassword(password);
-
+            x.setAdmin(admin);
         }
         catch (JSONException e)
         {
@@ -515,6 +519,21 @@ public class Metodos
             e.printStackTrace();
         }
         return lista;
+    }
+
+    public void insertarCategoria(Categoria x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_InsertarCategoria.php?nombre=" + x.getNombre());
+    }
+
+    public void modificarCategoria(Categoria x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_ModificarCategoria.php?id=" + x.getId() + "&nombre=" + x.getNombre());
+    }
+
+    public void eliminarCategoria(Categoria x)
+    {
+        httpGetData("http://" + ip + "/prueba/Clasificados_EliminarCategoria.php?id=" + x.getId());
     }
     //-------------------------------------------------------------------------
 

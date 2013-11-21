@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity
     public static String pathImagenesServidor = "http://" + MainActivity.ip + "/prueba/uploads/";
     public static Usuario usuario = new Usuario();
     public static ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-    Metodos metodos = new Metodos(ip);
+    static Metodos metodos = new Metodos(ip);
     EditText et_usuario;
     EditText et_password;
     ProgressBar pg_progressBar;
@@ -52,19 +52,7 @@ public class MainActivity extends ActionBarActivity
         //-------------------------------
 
 
-        //------ se cargan las categorias + la categoria Todas, con id -1
-        Categoria todas = new Categoria();
-        todas.setId(-1);
-        todas.setNombre("Todas");
 
-        categorias.add(todas);
-
-        ArrayList<Categoria> categoriasBD = metodos.getCategorias();
-        for(int i=0; i < categoriasBD.size(); i++)
-        {
-            categorias.add(categoriasBD.get(i));
-        }
-        //----------------------------------------------------------------------
 
 
         //se obtienen las variables de texto del layout y la barra de progrese
@@ -72,7 +60,7 @@ public class MainActivity extends ActionBarActivity
         et_password = (EditText)findViewById(R.id.et_password);
         pg_progressBar = (ProgressBar)findViewById(R.id.pg_progressBar);
 
-//        Intent i = new Intent(this, ModificarClasificado.class );
+//        Intent i = new Intent(this, Home.class );
 //        startActivity(i);
 
         pg_progressBar.setVisibility(View.INVISIBLE);
@@ -126,21 +114,37 @@ public class MainActivity extends ActionBarActivity
 
     public void iniciarSesion(View view)
     {
-        //asigna un 0 si no existe y un 1 si existe
-        int x = metodos.validarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
 
-        if(x == 1)
+        if (!et_usuario.getText().toString().equals("") && !et_password.getText().toString().equals(""))
         {
-            //se guar
-            usuario = metodos.getUsuario(et_usuario.getText().toString());
+            usuario.setUsuario(et_usuario.getText().toString());
+            usuario.setPassword(et_password.getText().toString());
+            //asigna un 0 si no existe y un 1 si existe
+            int x = metodos.validarUsuario(usuario);
 
-            Intent i = new Intent(this, Home.class );
-            startActivity(i);
+            if(x == 1)
+            {
+                //se guar
+                usuario = metodos.getUsuario(et_usuario.getText().toString());
+
+                Intent i = new Intent(this, Home.class );
+                startActivity(i);
+            }
+            else
+            {
+                new AlertDialog.Builder(this)
+                        .setTitle("El usuario o la contraseña no son correctas")
+                        .setPositiveButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {}
+                                }).show();
+            }
         }
         else
         {
             new AlertDialog.Builder(this)
-                    .setTitle("El usuario o la contraseña no son correctas")
+                    .setTitle("Complete todos los campos!")
                     .setPositiveButton("Aceptar",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -149,7 +153,23 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    public static void actualizarCategorias()
+    {
+        //------ se cargan las categorias + la categoria Todas, con id -1
+        if (categorias.size() == 0)
+        {
+            Categoria todas = new Categoria();
+            todas.setId(-1);
+            todas.setNombre("Todas");
 
+            categorias.add(todas);
 
-
+            ArrayList<Categoria> categoriasBD = metodos.getCategorias();
+            for(int i=0; i < categoriasBD.size(); i++)
+            {
+                categorias.add(categoriasBD.get(i));
+            }
+        }
+        //----------------------------------------------------------------------
+    }
 }

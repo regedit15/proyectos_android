@@ -163,22 +163,32 @@
 
                 <Button
                     android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:text="Modificar Clasificado"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Modificar"
                     android:id="@+id/button3"
                     android:onClick="confirmarModificacionDeClasificado"
                     style="@style/boton_el_tincho_azul" />
 
                 <Button
                     android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:text="Eliminar Clasificado"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Eliminar"
                     android:id="@+id/button4"
                     android:layout_marginLeft="11dp"
                     style="@style/boton_el_tincho_rojo"
                     android:onClick="confirmarEliminacionDeClasificado" />
 
             </LinearLayout>
+
+            <Button
+                android:layout_width="114dp"
+                android:layout_height="@dimen/ancho_de_botones"
+                android:text="Cancelar"
+                android:id="@+id/button5"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="13dp"
+                style="@style/boton_el_tincho_gris"
+                android:onClick="cancelar" />
         </LinearLayout>
     </ScrollView>
 

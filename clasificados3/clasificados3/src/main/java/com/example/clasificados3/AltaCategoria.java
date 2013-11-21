@@ -8,64 +8,59 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.clasificados3.Clases.Usuario;
+import com.example.clasificados3.Clases.Categoria;
 import com.example.clasificados3.Controladores.Metodos;
 
 /**
- * Created by martincho on 09/11/13.
+ * Created by martincho on 20/11/13.
  */
-public class RegistrarUsuario extends Activity
+public class AltaCategoria extends Activity
 {
     Metodos metodos = new Metodos(MainActivity.ip);
-    EditText et_usuario;
-    EditText et_password;
-    EditText et_correo;
-
+    EditText et_nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registrar_usuario);
+        setContentView(R.layout.alta_categoria);
 
-        et_usuario = (EditText)findViewById(R.id.et_usuario);
-        et_password = (EditText)findViewById(R.id.et_password);
-        et_correo = (EditText)findViewById(R.id.et_correo);
-
+        et_nombre = (EditText)findViewById(R.id.et_nombre);
     }
 
-    //---------------------------------- Metodos
 
-
-    public void registrarUsuario(View view)
+    //-------------------------------- Butones
+    public void nuevaCategoria(View view)
     {
-
-        if (!et_usuario.getText().toString().equals("") && !et_password.getText().toString().equals("") && !et_correo.getText().toString().equals(""))
+        if (!et_nombre.getText().toString().equals(""))
         {
-            //el metodo validarNombreUsuario devuelve 0 si no existe el nombre del usuario
-            if (metodos.validarNombreUsuario(et_usuario.getText().toString()) == 0)
+            Categoria x = new Categoria();
+
+            x.setNombre(et_nombre.getText().toString());
+
+            try
             {
-                Usuario x = new Usuario();
-
-                x.setUsuario(et_usuario.getText().toString());
-                x.setPassword(et_password.getText().toString());
-                x.setCorreo(et_correo.getText().toString());
-
-                metodos.insertarUsuario(x);
+                metodos.insertarCategoria(x);
+                MainActivity.actualizarCategorias();
 
                 new AlertDialog.Builder(this)
-                        .setTitle("Para finalizar ve a tu cuenta de correo!")
+                        .setTitle("Se ha creado una nueva categoria")
                         .setPositiveButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {}
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        volverAlHome();
+                                    }
                                 }).show();
             }
-            else
+            catch (Exception e)
             {
+                e.printStackTrace();
+
                 new AlertDialog.Builder(this)
-                        .setTitle("El usuario ingresado se encuentra en uso")
+                        .setTitle("Error...")
                         .setPositiveButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     @Override
@@ -85,11 +80,15 @@ public class RegistrarUsuario extends Activity
         }
     }
 
-    public void cancelar(View view)
+    public void volverAlHome()
     {
-        Intent i = new Intent(this, MainActivity.class );
+        Intent i = new Intent(this, Home.class );
         startActivity(i);
     }
 
+    public void cancelar(View view)
+    {
+        volverAlHome();
+    }
 
 }

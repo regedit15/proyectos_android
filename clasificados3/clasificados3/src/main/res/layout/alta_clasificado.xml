@@ -141,28 +141,31 @@
                                 android:text="Seleccionar"
                                 android:id="@+id/button3"
                                 android:onClick="seleccionarImagen"
-                                style="@style/boton_el_tincho_naranja"
-                                android:layout_marginLeft="14dp" />
+                                android:layout_marginLeft="14dp"
+                                style="@style/boton_el_tincho_naranja" />
 
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="match_parent"
-                                android:id="@+id/iv_imagen1"
-                                android:layout_weight="1" />
                         </LinearLayout>
                     </TableRow>
                 </TableLayout>
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/iv_imagen1"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="63dp">
+                android:layout_marginTop="63dp"
+                android:gravity="center_horizontal">
 
                 <Button
-                    android:layout_width="295dp"
+                    android:layout_width="138dp"
                     android:layout_height="@dimen/ancho_de_botones"
                     android:text="Nuevo"
                     android:id="@+id/button"
@@ -170,7 +173,26 @@
                     android:onClick="nuevoClasificado"
                     style="@style/boton_el_tincho_azul"
                     android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:layout_width="138dp"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Cancelar"
+                    android:id="@+id/button2"
+                    android:layout_marginLeft="21dp"
+                    android:textColor="#ffffff"
+                    style="@style/boton_el_tincho_gris"
+                    android:onClick="cancelar" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pg_progressBar"
+        android:layout_gravity="center_horizontal|center"
+        android:indeterminate="false" />
 </FrameLayout>

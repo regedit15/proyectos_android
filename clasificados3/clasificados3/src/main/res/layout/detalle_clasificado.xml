@@ -17,7 +17,7 @@
             android:layout_height="fill_parent"
             android:gravity="center_horizontal"
             android:id="@+id/layout_clasificado"
-            android:background="#00bd2c">
+            android:background="#6bde00">
 
             <TextView
                 android:layout_width="match_parent"
@@ -52,4 +52,13 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="145dp"
+        android:layout_height="@dimen/ancho_de_botones"
+        android:text="Cancelar"
+        android:id="@+id/button"
+        android:layout_gravity="right|bottom"
+        style="@style/boton_el_tincho_gris"
+        android:onClick="cancelar" />
 </FrameLayout>

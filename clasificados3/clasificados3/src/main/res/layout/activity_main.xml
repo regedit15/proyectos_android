@@ -84,9 +84,8 @@
                     android:text="Iniciar Sesion"
                     android:id="@+id/button"
                     android:onClick="iniciarSesion"
-                    android:background="#0085c5"
-                    android:textSize="20dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    style="@style/boton_el_tincho_azul" />
 
                 <Button
                     android:layout_width="150dp"

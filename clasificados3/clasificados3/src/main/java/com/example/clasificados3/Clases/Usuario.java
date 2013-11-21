@@ -9,14 +9,7 @@ public class Usuario
     String usuario;
     String password;
     String correo;
-
-    public Usuario(int id, String usuario, String password, String correo)
-    {
-        this.id = id;
-        this.usuario = usuario;
-        this.password = password;
-        this.correo = correo;
-    }
+    int admin;
 
     public Usuario()
     {
@@ -54,4 +47,9 @@ public class Usuario
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public int getAdmin() {return admin;}
+
+    public void setAdmin(int admin) {this.admin = admin;}
+
 }

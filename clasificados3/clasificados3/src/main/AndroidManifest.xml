@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name=".RegistrarUsuario"></activity>
         <activity android:name=".Home"></activity>
         <activity android:name=".AltaClasificado"></activity>
@@ -34,6 +33,9 @@
         <activity android:name=".VerImagen"></activity>
         <activity android:name=".MisClasificados"></activity>
         <activity android:name=".ModificarClasificado"></activity>
+        <activity android:name=".AltaCategoria"></activity>
+        <activity android:name=".ListadoCategorias"></activity>
+        <activity android:name=".ModificarCategoria"></activity>
     </application>
 
 </manifest>

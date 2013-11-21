@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/frameLayout">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/tableLayout" >
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Nombre:"
+                        android:id="@+id/textView"
+                        android:layout_column="0"
+                        android:gravity="bottom|right" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_nombre"
+                        android:layout_column="1"
+                        android:layout_weight="1" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="63dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/linearLayout" >
+
+                <Button
+                    style="@style/boton_el_tincho_azul"
+                    android:layout_width="138dp"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Modificar"
+                    android:id="@+id/button"
+                    android:layout_column="0"
+                    android:onClick="confirmarModificacionDeCategoria"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:layout_width="138dp"
+                    android:layout_height="@dimen/ancho_de_botones"
+                    android:text="Eliminar"
+                    android:id="@+id/button3"
+                    style="@style/boton_el_tincho_rojo"
+                    android:layout_marginLeft="35dp"
+                    android:onClick="confirmarEliminacionDeCategoria" />
+            </LinearLayout>
+
+            <Button
+                style="@style/boton_el_tincho_gris"
+                android:layout_width="138dp"
+                android:layout_height="@dimen/ancho_de_botones"
+                android:text="Cancelar"
+                android:id="@+id/button2"
+                android:textColor="#ffffff"
+                android:onClick="cancelar"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="21dp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

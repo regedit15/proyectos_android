@@ -83,4 +83,10 @@ public class MisClasificados extends Activity
         i.putExtra("idClasificado", clasificados.get(itemSeleccionado).getId());
         startActivity(i);
     }
+
+    public void volver(View view)
+    {
+        Intent i = new Intent(this, Home.class );
+        startActivity(i);
+    }
 }

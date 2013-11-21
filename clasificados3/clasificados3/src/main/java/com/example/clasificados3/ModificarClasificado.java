@@ -166,12 +166,6 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
             }
         }
 
-
-
-
-
-
-
         for (int a=0; a < clasificado.getImagenes().size(); a++)
         {
             Imagen i1 = clasificado.getImagenes().get(a);
@@ -233,17 +227,19 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
     
     public void confirmarQuitarImagenes(View view)
     {
-        new AlertDialog.Builder(this)
-                .setMessage("¿Suguro desea eliminar las imagenes seleccionadas?")
-                .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        quitarImagenes();
-                    }
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
+        if(clasificado.getImagenes().size() > 0)
+        {
+            new AlertDialog.Builder(this)
+                    .setMessage("¿Suguro desea eliminar las imagenes seleccionadas?")
+                    .setCancelable(false)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            quitarImagenes();
+                        }
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        }
     }
 
 
@@ -357,5 +353,11 @@ public class ModificarClasificado extends Activity implements AdapterView.OnItem
     }
     //------------------------------------------------------------------
 
+
+    public void cancelar(View view)
+    {
+        Intent i = new Intent(this, MisClasificados.class );
+        startActivity(i);
+    }
 }
 

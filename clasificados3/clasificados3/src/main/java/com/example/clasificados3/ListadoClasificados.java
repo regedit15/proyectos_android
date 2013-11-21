@@ -29,8 +29,6 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
     int categoriaSeleccionada;
     ArrayList<Clasificado> clasificados;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -157,4 +155,11 @@ public class ListadoClasificados extends Activity implements AdapterView.OnItemS
         // TODO Auto-generated method stub
     }
     //--------------------------------------------------------------------------------
+
+
+    public void volver(View view)
+    {
+        Intent i = new Intent(this, Home.class );
+        startActivity(i);
+    }
 }
